@@ -6,3 +6,6 @@ Trabalho final de Informática - Time 1
 Lucas Canejo Jurema
 
 Rodrigo Borba
+
+Marcus Vinicius Luna Dias
+

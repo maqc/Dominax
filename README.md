@@ -9,3 +9,5 @@ Rodrigo Borba
 
 Marcus Vinicius Luna Dias
 
+Regina Gomes
+

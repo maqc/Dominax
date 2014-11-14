@@ -18,3 +18,5 @@ Lucas Borges
 Maximiliano Adolfo Quirino Costa
 
 Viviane Sanguinett
+
+Gabriel Alfaya Sá Barreto

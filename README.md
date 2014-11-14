@@ -16,3 +16,5 @@ Lucas Pereira Calado
 Lucas Borges
 
 Maximiliano Adolfo Quirino Costa
+
+Viviane Sanguinett

@@ -21,4 +21,3 @@ Viviane Sanguinett
 
 Gabriel Alfaya Sá Barreto
 
-Arnold Felix Pereira

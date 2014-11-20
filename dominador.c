@@ -3,12 +3,13 @@
 int main(void)
 {
 	
-	int peca;
+	int peca=1;
 	int pp_1,pp_2; //pontas de peca  
 	int pm_1,pm_2; //pontas de mesa
 	int rodada=1;
 	char lado;     
-	
+  	int i; //contador
+
 	// escolha das maos
 	
 	int jogador1[7]={50,54,64,55,60,31,20};
@@ -22,14 +23,31 @@ int main(void)
 
 	while(rodada <= 4)
 	{
+	printf("Rodada %d\n",rodada);
+
+	//mostrar a mao do jogador
+	for(i=0;i<=6;i++) 
+		if (jogador2[i] ==peca) jogador2[i]=99;
+
+	printf("Sua mao: {");
+	for(i=0;i<=6;i++) 
+	{
+		if (jogador2[i] !=99) printf ("%d",jogador2[i]);
+		if (i <6 && jogador2[i]!=99) printf(",");
+		else if (i==6) printf("}\n");
+	}
+
+	//escolha da peca
 	printf("%s, qual peca vc quer jogar?\n","jogador");
 	scanf("%d",&peca);
 
+	
 	//separacao das pontas da peca
 	pp_1=peca/10;
 	pp_2=peca-pp_1*10;
 
 	//montagem das pontas de mesa
+
  	if(rodada ==1)
 	{
 		pm_1=pp_1;
@@ -64,7 +82,7 @@ int main(void)
 				  	   else pm_2=pp_1;	
 		 }
 	}
-	printf("Rodada %d\n",rodada);
+	
 	printf("Pontas: %d | %d\n\n",pm_1, pm_2);
     
 	// Teste de fim de jogo

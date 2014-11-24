@@ -25,7 +25,7 @@
  *    Webpage: WEB_PAGE                                                     *
  *    Phone: PHONE_NUMBER                                                   *
  * ************************************************************************ *
- * 
+ *
  */
 
 #include <stdio.h>
@@ -35,7 +35,6 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca,int pm[]);
 
 int main(void)
 {
-	
 	int jogador;
 	int p_jog; //primeiro jogador
 	int peca=1;
@@ -100,10 +99,6 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 {
 	int pp_1,pp_2; //pontas de peca
 	char lado;
-
-	//separacao das pontas da peca
-	pp_1=peca/10;
-	pp_2=peca-pp_1*10;
 
  	if(rodada ==1 && jogador== p_jog)
 		{

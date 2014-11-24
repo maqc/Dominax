@@ -39,7 +39,7 @@ int main(void)
 	int p_jog; //primeiro jogador
 	int peca=1;
 	int rodada=1;
-    int pm[2];
+    int pm[2]; //pontas de mesa
   	int i; //contador
 
 	// escolha das maos
@@ -60,11 +60,27 @@ int main(void)
 	
 		for(i=1;i<=4;i++) 
 		{
-			//mostra a mao do jogador
-			mostra_mao(jogador2, peca);
-
-			//escolha da peca
 			printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+
+			//mostra a mao do jogador
+			switch(jogador)
+			{
+			case 1:
+				mostra_mao(jogador1, peca);
+				break;
+			case 2:
+				mostra_mao(jogador2, peca);
+				break;
+			case 3:
+				mostra_mao(jogador3, peca);
+				break;
+			case 4:
+				mostra_mao(jogador4, peca);
+				break;
+			default:
+				break;
+			}
+
 			scanf("%d",&peca);
 
 			//montagem das pontas de mesa
@@ -73,7 +89,7 @@ int main(void)
 			// Teste de fim de jogo
 
 			jogador= (jogador % 4) +1;	
-		}//for	
+		}	
 			rodada +=1;
 	}//fim do while
 	return 0;
@@ -99,6 +115,10 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 {
 	int pp_1,pp_2; //pontas de peca
 	char lado;
+
+	//separacao das pontas de peca
+	pp_1=peca/10;
+	pp_2=peca-pp_1*10;
 
  	if(rodada ==1 && jogador== p_jog)
 		{

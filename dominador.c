@@ -33,6 +33,7 @@
 int mostra_mao(int jog[]);
 int monta_pm(int rodada, int jogador, int p_jog, int peca,int pm[]);
 int teste_toque(int player[],int pm[]);
+int teste_final(int player[],int jogador);
 
 int main(void)
 {
@@ -55,7 +56,7 @@ int main(void)
 	jogador = p_jog;
 
 	// rodadas
-	while(rodada <= 4)
+	while(rodada <= 28)
 	{
 		printf("Rodada %d\n",rodada);
 	
@@ -83,7 +84,11 @@ int main(void)
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
+				//teste de fim de jogo
+				if (teste_final(jogador1,jogador)) return 0;
+			    
 				break;
+
 			case 2:
 				if ( (rodada !=1) || (jogador != p_jog))
 					if (teste_toque(jogador2,pm)) 
@@ -102,7 +107,11 @@ int main(void)
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 		
+				//teste de fim de jogo
+			    if (teste_final(jogador2,jogador)) return 0;	
+
 				break;
+
 			case 3:
 				if ( (rodada !=1) || (jogador != p_jog))
 					if (teste_toque(jogador3,pm)) 
@@ -120,10 +129,15 @@ int main(void)
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
+
+				//teste de fim de jogo
+			    if (teste_final(jogador3,jogador)) return 0;
+
 				break;
+
 			case 4:
 				if ( (rodada !=1) || (jogador != p_jog))
-					if (teste_toque(jogador3,pm)) 
+					if (teste_toque(jogador4,pm)) 
 					{
 						printf("O jogador %d tocou!\n",jogador);		
 						break;
@@ -139,13 +153,14 @@ int main(void)
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
+				//teste de fim de jogo
+			    if (teste_final(jogador4,jogador)) return 0;		
 				break;
+
 			default:
 				break;
 			} //fim do switch
 		    
-			// Teste de fim de jogo
-
 			jogador= (jogador % 4) +1;	
 		} //fim do "for" para troca de jogadores	
 		rodada +=1;
@@ -230,3 +245,17 @@ int teste_toque(int player[],int pm[])
 	}
 	return 1;
 }
+
+int teste_final(int player[],int jogador)
+{
+	int soma=0;
+	int i;
+	for(i=0;i<=6;i++)
+		soma+=player[i];
+	if(soma == 693)
+	{
+		printf("Fim de jogo, o jogador %d venceu!\n",jogador);
+		return 1;
+	}
+	return 0;
+}	

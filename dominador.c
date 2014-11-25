@@ -30,8 +30,9 @@
 
 #include <stdio.h>
 
-int mostra_mao(int jog[], int peca);
+int mostra_mao(int jog[]);
 int monta_pm(int rodada, int jogador, int p_jog, int peca,int pm[]);
+int teste_toque(int player[],int pm[]);
 
 int main(void)
 {
@@ -39,8 +40,8 @@ int main(void)
 	int p_jog; //primeiro jogador
 	int peca=1;
 	int rodada=1;
-    int pm[2]; //pontas de mesa
-  	int i; //contador
+    int pm[2]={9,9}; //pontas de mesa
+  	int i,j; //contadores
 
 	// escolha das maos
 	int jogador1[7]={50,54,64,55,60,31,20};
@@ -53,54 +54,108 @@ int main(void)
 	scanf("%d", &p_jog);
 	jogador = p_jog;
 
-	//rodadas
+	// rodadas
 	while(rodada <= 4)
 	{
 		printf("Rodada %d\n",rodada);
 	
+		//troca de jogadores dentro de uma rodada
 		for(i=1;i<=4;i++) 
 		{
-			printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
-
-			//mostra a mao do jogador
+			//testa o toque e mostra a mao do jogador
 			switch(jogador)
 			{
 			case 1:
-				mostra_mao(jogador1, peca);
+				if ( (rodada !=1) || (jogador != p_jog))
+					if (teste_toque(jogador1,pm)) 
+					{
+						printf("O jogador %d tocou!\n",jogador);		
+						break;
+					}
+				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+				mostra_mao(jogador1);
+				scanf("%d",&peca);
+
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+	 				if (jogador1[j] ==peca) jogador1[j]=99;
+
+				//montagem das pontas de mesa
+				monta_pm(rodada,jogador,p_jog,peca,pm);
+
 				break;
 			case 2:
-				mostra_mao(jogador2, peca);
+				if ( (rodada !=1) || (jogador != p_jog))
+					if (teste_toque(jogador2,pm)) 
+					{
+						printf("O jogador %d tocou!\n",jogador);		
+						break;
+					}
+				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+				mostra_mao(jogador2);
+				scanf("%d",&peca);
+
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+	 				if (jogador2[j] ==peca) jogador2[j]=99;
+
+				//montagem das pontas de mesa
+				monta_pm(rodada,jogador,p_jog,peca,pm);
+		
 				break;
 			case 3:
-				mostra_mao(jogador3, peca);
+				if ( (rodada !=1) || (jogador != p_jog))
+					if (teste_toque(jogador3,pm)) 
+					{
+						printf("O jogador %d tocou!\n",jogador);		
+						break;
+					}
+				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+				mostra_mao(jogador3);
+				scanf("%d",&peca); 
+
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+	 				if (jogador3[j] ==peca) jogador3[j]=99;
+
+				//montagem das pontas de mesa
+				monta_pm(rodada,jogador,p_jog,peca,pm);
 				break;
 			case 4:
-				mostra_mao(jogador4, peca);
+				if ( (rodada !=1) || (jogador != p_jog))
+					if (teste_toque(jogador3,pm)) 
+					{
+						printf("O jogador %d tocou!\n",jogador);		
+						break;
+					}
+				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+				mostra_mao(jogador4);
+				scanf("%d",&peca);
+
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+	 				if (jogador4[j] ==peca) jogador4[j]=99;
+
+				//montagem das pontas de mesa
+				monta_pm(rodada,jogador,p_jog,peca,pm);
+
 				break;
 			default:
 				break;
-			}
-
-			scanf("%d",&peca);
-
-			//montagem das pontas de mesa
-			monta_pm(rodada,jogador,p_jog,peca,pm);
+			} //fim do switch
 		    
 			// Teste de fim de jogo
 
 			jogador= (jogador % 4) +1;	
-		}	
-			rodada +=1;
+		} //fim do "for" para troca de jogadores	
+		rodada +=1;
 	}//fim do while
 	return 0;
 } // main
 
-int mostra_mao(int jog[], int peca)
+int mostra_mao(int jog[])
 {
     int i;
-	for(i=0;i<=6;i++)
-	 	if (jog[i] ==peca) jog[i]=99;
-				 
 	printf("Sua mao: {");
 	for(i=0;i<=6;i++) 
 	{
@@ -122,39 +177,56 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 
  	if(rodada ==1 && jogador== p_jog)
 		{
-			pm[1]=pp_1;
-			pm[2]=pp_2;
+			pm[0]=pp_1;
+			pm[1]=pp_2;
 		}
-		else
+	else
+	{
+    	if((pp_1==pm[0] || pp_1==pm[1]) && (pp_2==pm[0] || pp_2==pm[1]))
 		{
-    		if((pp_1==pm[1] || pp_1==pm[2]) && (pp_2==pm[1] || pp_2==pm[2]))
+			printf("Escolha o lado direito ou esquerdo(d ou e): ");
+			scanf("%c",&lado);
+			if(lado=='d')
 			{
-				printf("Escolha o lado direito ou esquerdo(d ou e): ");
-				scanf("%c",&lado);
-				if(lado=='d')
-				{
-					if(pm[2] ==pp_1) pm[2]=pp_2;
-					else pm[2]=pp_1;
-				}
-				else
-				{
-					if(pm[1] == pp_1) pm[1]=pp_2;
-					else pm[1]=pp_1;
-				}
+				if(pm[1] ==pp_1) pm[1]=pp_2;
+				else pm[1]=pp_1;
 			}
-			else if((pp_1!=pm[1] && pp_1!=pm[2])&&(pp_2!=pm[1] && pp_2 !=pm[2]))
-	 		{
-	 		// temporariamente vazio	
-	 		}
-	 		else
-	 		{
-				if(pm[1]==pp_1) pm[1]=pp_2;
-				else if(pm[1]==pp_2) pm[1]=pp_1;
-				else if(pm[2]==pp_1) pm[2]=pp_2;
-	    		else pm[2]=pp_1;	
-	 		}
+			else
+			{
+				if(pm[0] == pp_1) pm[0]=pp_2;
+				else pm[0]=pp_1;
+			}
 		}
-		printf("Pontas da mesa: %d | %d\n\n",pm[1], pm[2]);
+	 	else
+	 	{
+		
+			if(pm[0]==pp_1) pm[0]=pp_2;
+			else if(pm[0]==pp_2) pm[0]=pp_1;
+			else if(pm[1]==pp_1) pm[1]=pp_2;
+	   		else pm[1]=pp_1;	
+	 	}
+	}
+	printf("Pontas da mesa: %d | %d\n\n",pm[0], pm[1]);
 	return 0;
 }
 
+int teste_toque(int player[],int pm[])
+{
+	int peca;
+	int i, contador=0; //contadores
+	int pp_1, pp_2; //pontas de peca
+
+	for(i=0;i<=6;i++)
+	{
+		peca = player[i];
+
+		//separacao das pontas de peca
+		pp_1=peca/10;
+		pp_2=peca-pp_1*10;
+
+		if(pp_1 == pm[0] || pp_1 == pm[1] || pp_2 == pm[0] || pp_2 == pm[1])
+			contador +=1;
+		if (contador != 0) return 0;
+	}
+	return 1;
+}

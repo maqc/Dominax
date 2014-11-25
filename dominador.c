@@ -1,8 +1,10 @@
 /* ************************************************************************ *
- *    PROGRAM_NAME, VERSION                                                 *
- *    BRIEF_DESCRIPTION                                                     *
+ *    Domino001, versão 1.0                                                 *
+ *    Programa feito para jogar domino                                      *
  *                                                                          *
- *    Copyright (C) 20XX by AUTHORs_NAME                                    *
+ *    Copyright (C) 20XX by LUCAS CANEJO, RODRIGO BORBA, MARCUS VINICIUS,   *
+ *    REGINA GOMES, LUCAS CALADO, LUCAS BORGES, MAXIMILIANO ADOLFO,         *
+ *    VIVIANE SANGUINETT, GABRIEL ALFAYA, ANORLD FELIX                      *
  *                                                                          *
  *    This program is free software; you can redistribute it and/or modify  *
  *    it under the terms of the GNU General Public License as published by  *

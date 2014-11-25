@@ -29,11 +29,7 @@
  */
 
 #include <stdio.h>
-
-int mostra_mao(int jog[]);
-int monta_pm(int rodada, int jogador, int p_jog, int peca,int pm[]);
-int teste_toque(int player[],int pm[]);
-int teste_final(int player[],int jogador);
+#include "minhas_funcoes.h"
 
 int main(void)
 {
@@ -57,7 +53,7 @@ int main(void)
 	jogador = p_jog;
 
 	// rodadas
-	while(rodada <= 28)
+	while(rodada <= 7)
 	{
 		printf("Rodada %d\n",rodada);
 	
@@ -107,95 +103,3 @@ int main(void)
 	}//fim do while
 	return 0;
 } // main
-
-int mostra_mao(int jog[])
-{
-    int i;
-	printf("Sua mao: {");
-	for(i=0;i<=6;i++) 
-	{
-		if (jog[i] !=99) printf ("%d",jog[i]);
-		if (i <6 && jog[i]!=99) printf(",");
-		else if (i==6) printf("}\n");
-	}
-	return 0;
-}
-
-int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
-{
-	int pp_1,pp_2; //pontas de peca
-	char lado;
-
-	//separacao das pontas de peca
-	pp_1=peca/10;
-	pp_2=peca-pp_1*10;
-
- 	if(rodada ==1 && jogador== p_jog)
-		{
-			pm[0]=pp_1;
-			pm[1]=pp_2;
-		}
-	else
-	{
-    	if((pp_1==pm[0] || pp_1==pm[1]) && (pp_2==pm[0] || pp_2==pm[1]))
-		{
-			printf("Escolha o lado direito ou esquerdo(d ou e): ");
-			scanf("%c",&lado);
-			if(lado=='d')
-			{
-				if(pm[1] ==pp_1) pm[1]=pp_2;
-				else pm[1]=pp_1;
-			}
-			else
-			{
-				if(pm[0] == pp_1) pm[0]=pp_2;
-				else pm[0]=pp_1;
-			}
-		}
-	 	else
-	 	{
-		
-			if(pm[0]==pp_1) pm[0]=pp_2;
-			else if(pm[0]==pp_2) pm[0]=pp_1;
-			else if(pm[1]==pp_1) pm[1]=pp_2;
-	   		else pm[1]=pp_1;	
-	 	}
-	}
-	printf("Pontas da mesa: %d | %d\n\n",pm[0], pm[1]);
-	return 0;
-}
-
-int teste_toque(int player[],int pm[])
-{
-	int peca;
-	int i, contador=0; //contadores
-	int pp_1, pp_2; //pontas de peca
-
-	for(i=0;i<=6;i++)
-	{
-		peca = player[i];
-
-		//separacao das pontas de peca
-		pp_1=peca/10;
-		pp_2=peca-pp_1*10;
-
-		if(pp_1 == pm[0] || pp_1 == pm[1] || pp_2 == pm[0] || pp_2 == pm[1])
-			contador +=1;
-		if (contador != 0) return 0;
-	}
-	return 1;
-}
-
-int teste_final(int player[],int jogador)
-{
-	int soma=0;
-	int i;
-	for(i=0;i<=6;i++)
-		soma+=player[i];
-	if(soma == 693)
-	{
-		printf("Fim de jogo, o jogador %d venceu!\n",jogador);
-		return 1;
-	}
-	return 0;
-}	

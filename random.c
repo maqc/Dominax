@@ -9,6 +9,7 @@ int main(void)
 	int peca[28] = {0,10,20,30,40,50,60,11,21,31,41,51,61,22,32,42,52,62,33,43,53,63,44,54,64,55,65,66};
 	int jafoi[28]={0};
 	int jogador1[7];
+	int jogador2[7];
 	srand(time(NULL));
 	
 	while(passagens!=7)
@@ -34,7 +35,7 @@ int main(void)
 	printf("}");
 	printf("\n");
 	
-}
+
 
 
 	passagens=0;
@@ -58,8 +59,8 @@ int main(void)
 	     else
 		 	printf("%d,", jogador2[k]);
 		 }
-		 printf("}")
+		 printf("}");
 		 printf("\n");
 	     return 0;
-
+}
 

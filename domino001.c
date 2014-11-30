@@ -38,6 +38,7 @@ int main(void)
 {
 	int jogador;
 	int p_jog=99; //primeiro jogador
+	int t_peca=0; //Teste de existencia de peca
 	int peca=1;
 	int rodada=1;
     int pm[2]={9,9}; //pontas de mesa
@@ -92,9 +93,19 @@ int main(void)
 				{
 					printf("O jogador %d tocou!\n\n",jogador);		
 				}
-			printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
-			mostra_mao(player);
-			scanf("%d",&peca);
+
+			while(t_peca==0)
+			{
+				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
+				mostra_mao(player);
+				scanf("%d",&peca);
+				//teste de peca
+				for(j=0;j<=6;j++)
+					if(peca == player[j]) t_peca=1;
+				if (t_peca==0) 
+					printf("A peca que voce escolheu nao esta na mao do jogador %d.\n",jogador);
+			}
+			t_peca=0;
 
 			// "retira" peca escolhida da mao
 			for(j=0;j<=6;j++)

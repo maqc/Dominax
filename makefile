@@ -4,8 +4,8 @@
 exec_auto: domino001.x 
 	./domino001.x  
 
-domino001.x : domino001.c mostra_mao.c monta_pm.c teste_toque.c teste_final.c
-	gcc -Wall -Wextra -O0 -g domino001.c mostra_mao.c monta_pm.c teste_toque.c teste_final.c -o domino001.x  2>&1 | tee errors_domino001.txt
+domino001.x : domino001.c mostra_mao.c monta_pm.c teste_toque.c teste_final.c teste_peca.c
+	gcc -Wall -Wextra -O0 -g domino001.c mostra_mao.c monta_pm.c teste_toque.c teste_final.c teste_peca.c -o domino001.x  2>&1 | tee errors_domino001.txt
 
 
 clean :

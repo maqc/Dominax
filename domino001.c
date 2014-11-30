@@ -36,7 +36,7 @@
 int main(void)
 {
 	int jogador;
-	int p_jog; //primeiro jogador
+	int p_jog=99; //primeiro jogador
 	int peca=1;
 	int rodada=1;
     int pm[2]={9,9}; //pontas de mesa
@@ -50,8 +50,14 @@ int main(void)
 	int jogador4[7]={61,22,30,10,40,43,33};
 
 	// escolha do iniciante
-	printf("Qual jogador iniciara o jogo? \n");
-	scanf("%d", &p_jog);
+	while(p_jog < 1 || p_jog >4 )
+	{
+		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n"
+			   "Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
+		scanf("%d", &p_jog);
+		if (p_jog < 1 || p_jog > 4) 
+			printf("Voce escolheu uma opcao invalida.\n\n");
+	}
 	jogador = p_jog;
 
 	// rodadas

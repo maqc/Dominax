@@ -16,9 +16,9 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 		}
 	else
 	{
-    	if((pp_1==pm[0] || pp_1==pm[1]) && (pp_2==pm[0] || pp_2==pm[1]))
+    	if((pp_1==pm[0] && pp_2==pm[1]) || (pp_1==pm[1] && pp_2==pm[0]))
 		{
-			printf("Escolha o lado direito ou esquerdo(d ou e): ");
+			printf("Escolha o lado direito ou esquerdo(d ou e): \n");
 			scanf("%c",&lado);
 			if(lado=='d')
 			{

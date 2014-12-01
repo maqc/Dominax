@@ -42,6 +42,7 @@ int main(void)
 	int rodada=1;
     int pm[2]={9,9}; //pontas de mesa
   	int i,j; //contadores
+	int tt;//teste de toque
 	int *player;
 
 	// escolha das maos
@@ -92,10 +93,10 @@ int main(void)
 				{
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
 					t_peca =2; //ignora o teste de peca
-					j=6;   //ignora a retirada de peca
+					tt=99;   //ignora as etapas de retirada, montagem, e teste de final 
 				}
 
-			//leitura e testes de peca
+			//leitura e testes de peca (existencia e compatibilidade)
 			while(t_peca !=2)
 			{
 				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
@@ -106,17 +107,20 @@ int main(void)
 			}
 			t_peca=0;
 
-			// "retira" peca escolhida da mao
-			for(j=0;j<=6;j++)
-	 			if (player[j] ==peca) player[j]=99;
+			if (tt !=99)
+			{
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+	 				if (player[j] ==peca) player[j]=99;
 
-			//montagem das pontas de mesa
-			if(!teste_toque(player,pm)) 
+				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
-			//teste de fim de jogo
-			if (teste_final(player,jogador)) return 0;
-		    
+				//teste de fim de jogo
+				if (teste_final(player,jogador)) return 0;
+			}
+            tt=0;
+
 			jogador= (jogador % 4) +1;	
 		} //fim do "for" para troca de jogadores	
 		rodada +=1;

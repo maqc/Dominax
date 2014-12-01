@@ -47,7 +47,7 @@ int main(void)
 	// escolha das maos
 	int jogador1[7]={50,54,64,55,60,31,20};
 	int jogador2[7]={11,21,52,42,66,62,44};
-	int jogador3[7]={32,63,00,41,53,51,65};
+	int jogador3[7]={32,63,0,41,53,51,65};
 	int jogador4[7]={61,22,30,10,40,43,33};
 
 	// escolha do iniciante
@@ -86,7 +86,7 @@ int main(void)
 				default:
 					break;
 			}
-			
+		    //teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
 				if (teste_toque(player,pm)) 
 				{
@@ -95,13 +95,13 @@ int main(void)
 					j=6;   //ignora a retirada de peca
 				}
 
+			//leitura e testes de peca
 			while(t_peca !=2)
 			{
 				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
 				mostra_mao(player);
 				scanf("%d",&peca);
-
-				//testes de peca
+				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
 				t_peca = teste_peca(peca,rodada,p_jog,pm,player,jogador);
 			}
 			t_peca=0;

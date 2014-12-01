@@ -57,6 +57,7 @@ int main(void)
 		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n"
 			   "Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
 		scanf("%d", &p_jog);
+		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
 		if (p_jog < 1 || p_jog > 4) 
 			printf("Voce escolheu uma opcao invalida.\n\n");
 	}
@@ -87,20 +88,29 @@ int main(void)
 				default:
 					break;
 			}
+
 		    //teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
 				if (teste_toque(mao_c,pm)) 
 				{
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
 					t_peca =2; //ignora o teste de peca
-					tt=99;   //ignora as etapas de retirada, montagem, e teste de final 
+					tt=99; // variavel para ignorar etapas
 				}
+
+			//protecao da mao
+			if (tt !=99)
+			{
+				printf("Jogador %d, posso mostrar sua mão agora?"
+					   " Digite \"s\" para sim.\n",jogador);
+				getchar();
+				mostra_mao(mao_c);
+			}
 
 			//leitura e testes de peca (existencia e compatibilidade)
 			while(t_peca !=2)
 			{
-				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
-				mostra_mao(mao_c);
+				printf("Digite a peca que vc quer jogar: ");
 				scanf("%d",&peca);
 				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
 				t_peca = teste_peca(peca,rodada,p_jog,pm,mao_c,jogador);
@@ -113,6 +123,7 @@ int main(void)
 				for(j=0;j<=6;j++)
 	 				if (mao_c[j] ==peca) mao_c[j]=99;
 
+				
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
@@ -121,7 +132,7 @@ int main(void)
 			}
             tt=0;
 
-			jogador= (jogador % 4) +1;	
+			jogador= (jogador % 4) +1; //troca de jogador	
 		} //fim do "for" para troca de jogadores	
 		rodada +=1;
 	}//fim do while

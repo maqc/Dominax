@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 {
 	int pp_1,pp_2; //pontas de peca
 	char lado;
+	char command[50]; //recebe comando para o sistema
 
 	//separacao das pontas de peca
 	pp_1=peca/10;
@@ -19,7 +21,7 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
     	if((pp_1==pm[0] && pp_2==pm[1]) || (pp_1==pm[1] && pp_2==pm[0]))
 		{
 			printf("Digite \"d\" para escolher o lado direito da mesa"
-				   " ou qualquer outro caracter para o lado esquerdo.\n");
+				   " ou \"e\" para o lado esquerdo.\n");
 			scanf("%c",&lado);
 			if(lado=='d')
 			{
@@ -41,6 +43,10 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 	   		else pm[1]=pp_1;	
 	 	}
 	}
+	//rolagem de tela
+	sprintf(command,"clear");
+	system(command);
+
 	printf("Pontas da mesa: %d | %d\n\n",pm[0], pm[1]);
 	return 0;
 }

@@ -43,13 +43,13 @@ int main(void)
     int pm[2]={9,9}; //pontas de mesa
   	int i,j; //contadores
 	int tt;//teste de toque
-	int *player;
+	int *mao_c; //apontador para a mao corrente
 
 	// escolha das maos
-	int jogador1[7]={50,54,64,55,60,31,20};
-	int jogador2[7]={11,21,52,42,66,62,44};
-	int jogador3[7]={32,63,0,41,53,51,65};
-	int jogador4[7]={61,22,30,10,40,43,33};
+	int mao_1[7]={50,54,64,55,60,31,20};
+	int mao_2[7]={11,21,52,42,66,62,44};
+	int mao_3[7]={32,63,0,41,53,51,65};
+	int mao_4[7]={61,22,30,10,40,43,33};
 
 	// escolha do iniciante
 	while(p_jog < 1 || p_jog >4 )
@@ -73,23 +73,23 @@ int main(void)
 			switch(jogador)
 			{
 				case 1:
-					player=jogador1;
+					mao_c =mao_1;
 					break;
 				case 2:
-					player=jogador2;
+					mao_c =mao_2;
 					break;
 				case 3:
-					player=jogador3;
+					mao_c =mao_3;
 					break;
 				case 4:
-					player=jogador4;
+					mao_c =mao_4;
 					break;
 				default:
 					break;
 			}
 		    //teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
-				if (teste_toque(player,pm)) 
+				if (teste_toque(mao_c,pm)) 
 				{
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
 					t_peca =2; //ignora o teste de peca
@@ -100,10 +100,10 @@ int main(void)
 			while(t_peca !=2)
 			{
 				printf("Jogador %d, qual peca vc quer jogar?\n",jogador);
-				mostra_mao(player);
+				mostra_mao(mao_c);
 				scanf("%d",&peca);
 				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-				t_peca = teste_peca(peca,rodada,p_jog,pm,player,jogador);
+				t_peca = teste_peca(peca,rodada,p_jog,pm,mao_c,jogador);
 			}
 			t_peca=0;
 
@@ -111,13 +111,13 @@ int main(void)
 			{
 				// "retira" peca escolhida da mao
 				for(j=0;j<=6;j++)
-	 				if (player[j] ==peca) player[j]=99;
+	 				if (mao_c[j] ==peca) mao_c[j]=99;
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
 				//teste de fim de jogo
-				if (teste_final(player,jogador)) return 0;
+				if (teste_final(mao_c,jogador)) return 0;
 			}
             tt=0;
 

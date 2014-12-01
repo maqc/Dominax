@@ -90,7 +90,9 @@ int main(void)
 			if ( (rodada !=1) || (jogador != p_jog))
 				if (teste_toque(player,pm)) 
 				{
-					printf("O jogador %d tocou!\n\n",jogador);		
+					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
+					t_peca =2; //ignora o teste de peca
+					j=6;   //ignora a retirada de peca
 				}
 
 			while(t_peca !=2)
@@ -109,7 +111,8 @@ int main(void)
 	 			if (player[j] ==peca) player[j]=99;
 
 			//montagem das pontas de mesa
-			monta_pm(rodada,jogador,p_jog,peca,pm);
+			if(!teste_toque(player,pm)) 
+				monta_pm(rodada,jogador,p_jog,peca,pm);
 
 			//teste de fim de jogo
 			if (teste_final(player,jogador)) return 0;

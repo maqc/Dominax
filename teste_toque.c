@@ -1,4 +1,4 @@
-int teste_toque(int player[],int pm[])
+int teste_toque(int mao[],int pm[])
 {
 	int peca;
 	int i, contador=0; //contadores
@@ -6,7 +6,7 @@ int teste_toque(int player[],int pm[])
 
 	for(i=0;i<=6;i++)
 	{
-		peca = player[i];
+		peca = mao[i];
 
 		//separacao das pontas de peca
 		pp_1=peca/10;

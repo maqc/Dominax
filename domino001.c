@@ -80,7 +80,7 @@ int main(void)
 			y++;
 		}
 	}
-	printf("Sua mao:\n");
+	printf("jogador 1:\n");
 	printf("{");
 	for(k=0;k<7;k++)
 	{
@@ -104,7 +104,7 @@ int main(void)
 			x++;
 		}
 	}
-	printf("Sua mao:\n");
+	printf("jogador 2:\n");
 	printf("{");
 	for(k=0;k<7;k++)
 	{
@@ -128,7 +128,7 @@ int main(void)
 			z++;
 		}
 	}
-	printf("Sua mao:\n");
+	printf("Jogador 3:\n");
 	printf("{");
 	for(k=0;k<7;k++)
 	{
@@ -152,7 +152,7 @@ int main(void)
 			v++;
 		}
 	}
-	printf("Sua mao:\n");
+	printf("Jogador 3:\n");
 	printf("{");
 	for(k=0;k<7;k++)
 	{

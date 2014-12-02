@@ -33,18 +33,28 @@
 #include <stdio.h>
 #include "minhas_funcoes.h"
 
+#define HOUVE_TOQUE 99
+#define SEM_TOQUE 0
+#define PECA_RETIRADA 99
+#define PECA_INEXISTENTE 9
+#define PMV 9 //ponta de mesa vazia
+#define SEM_JOGADOR 50
+#define MAX_RODADAS 100 //numero maximo de rodadas
+#define SEQ_TOQUES 4  //sequencia maxima de toques consecutivos
+
+
 int main(void)
 {
 	int jogador;
-	int p_jog=99; //primeiro jogador
+	int p_jog= SEM_JOGADOR; //primeiro jogador
 	int t_peca=0; //testes de peca
-	int peca=1;
+	int peca=PECA_INEXISTENTE;
 	int rodada=1;
-    int pm[2]={9,9}; //pontas de mesa
+    int pm[2]={PMV,PMV}; //pontas de mesa
   	int i,j; //contadores
-	int tt;//teste de toque
+	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
-	int mem_toq[4]={0,0,0,0};
+	int mem_toq[4]={0,0,0,0}; //memoria de toque
 	char ver_b; //Versao beta
 
 	// escolha das maos
@@ -68,7 +78,7 @@ int main(void)
 	jogador = p_jog;
 
 	// rodadas
-	while(rodada <= 100)
+	while(rodada <= MAX_RODADAS)
 	{
 		printf("Rodada %d\n",rodada);
 	
@@ -101,21 +111,21 @@ int main(void)
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
 					mem_toq[jogador-1]=1;
 					t_peca =2; //ignora o teste de peca
-					tt=99; // variavel para ignorar etapas
+					tt= HOUVE_TOQUE; // variavel para ignorar etapas
 				}
 				else mem_toq[jogador-1]=0;
 			}
 			int soma=0;
 			for (j=0; j<=3;j++)
 				soma+=mem_toq[j];
-			if (soma==4) 
+			if (soma==SEQ_TOQUES) 
 			{
 				contagem_maos(mao_1,mao_2,mao_3,mao_4);	
 				return 0;
 			}
 
 			//protecao da mao
-			if (tt !=99)
+			if (tt != HOUVE_TOQUE)
 			{
 				if (ver_b=='n')
 				{
@@ -127,7 +137,7 @@ int main(void)
 				mostra_mao(mao_c);
 			}
 
-			//leitura e testes de peca (existencia e compatibilidade)
+			//leitura e testes de peca (existencia e compatibilidade com pontas de mesa)
 			while(t_peca !=2)
 			{
 				printf("Digite a peca que vc quer jogar: ");
@@ -137,11 +147,11 @@ int main(void)
 			}
 			t_peca=0;
 
-			if (tt !=99)
+			if (tt != HOUVE_TOQUE)
 			{
 				// "retira" peca escolhida da mao
 				for(j=0;j<=6;j++)
-	 				if (mao_c[j] ==peca) mao_c[j]=99;
+	 				if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
@@ -149,7 +159,7 @@ int main(void)
 				//teste de fim de jogo
 				if (teste_final(mao_c,jogador)) return 0;
 			}
-            tt=0;
+            tt=SEM_TOQUE;
 
 			jogador= (jogador % 4) +1; //troca de jogador	
 		} //fim do "for" para troca de jogadores	

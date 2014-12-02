@@ -42,7 +42,15 @@
 #define MAX_RODADAS 100 //numero maximo de rodadas
 #define SEQ_TOQUES 4  //sequencia maxima de toques consecutivos
 
-
+/**
+ *\file domino001.c
+ *\brief Arquivo principal do programa Domino001
+ *
+ *Esse programa foi desenvolvido para permitir uma partida de dominó
+ *entre 4 jogadores humanos. Ele permite iniciamente a escolha entre
+ *a versão de desenvolvimento (beta) ou a versão usuário final. 
+ *
+ */
 int main(void)
 {
 	int jogador;

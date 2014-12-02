@@ -32,6 +32,8 @@
 
 #include <stdio.h>
 #include "minhas_funcoes.h"
+#include <stdlib.h>
+#include <time.h>
 
 #define HOUVE_TOQUE 99
 #define SEM_TOQUE 0
@@ -58,24 +60,124 @@ int main(void)
 	int t_peca=0; //testes de peca
 	int peca=PECA_INEXISTENTE;
 	int rodada=1;
-    int pm[2]={PMV,PMV}; //pontas de mesa
-  	int i,j; //contadores
+	int pm[2]={PMV,PMV}; //pontas de mesa
+	int i,j; //contadores
 	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
 	int mem_toq[4]={0,0,0,0}; //memoria de toque
 	char ver_b; //Versao beta
+	int y=0,x=0,z=0,v=0,k;
+	int passagens=0, temporario;
+	int pecas[28]= {0,10,20,30,40,50,60,11,21,31,41,51,61,22,32,42,52,62,33,43,53,63,44,54,64,55,65,66};
+	int jafoi[28]={0};
+	int mao_1[7];
+	int mao_2[7];
+	int mao_3[7];
+	int mao_4[7];
+	srand(time(NULL));
 
-	// escolha das maos
-	int mao_1[7]={50,54,64,55,60,31,20};
-	int mao_2[7]={11,21,52,42,66,62,44};
-	int mao_3[7]={32,63,0,41,53,51,65};
-	int mao_4[7]={61,22,30,10,40,43,33};
+	// sorteio das maos
+	while(passagens!=7)
+	{
+		temporario= rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_1[y]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			y++;
+		}
+	}
+	printf("jogador 1:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_1[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_1[k]);
+	}
+	printf("}");
+	printf("\n");
+
+	passagens=0;
+	while(passagens!=7)
+	{
+		temporario= rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_2[x]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			x++;
+		}
+	}
+	printf("jogador 2:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_2[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_2[k]);
+	}
+	printf("}");
+	printf("\n");
+
+	passagens=0;
+	while(passagens!=7)
+	{
+		temporario = rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_3[z]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			z++;
+		}
+	}
+	printf("Jogador 3:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_3[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_3[k]);
+	}
+	printf("}");
+	printf("\n");
+
+	passagens=0;
+	while(passagens!=7)
+	{
+		temporario = rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_4[v]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			v++;
+		}
+	}
+	printf("Jogador 3:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_4[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_4[k]);
+	}
+	printf("}");
+	printf("\n");
+
 
 	// escolha do iniciante
 	while(p_jog < 1 || p_jog >4 )
 	{
 		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n"
-			   "Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
+				"Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
 		scanf("%c",&ver_b);
 		printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
 		scanf("%d", &p_jog);
@@ -89,7 +191,7 @@ int main(void)
 	while(rodada <= MAX_RODADAS)
 	{
 		printf("Rodada %d\n",rodada);
-	
+
 		//troca de jogadores dentro de uma rodada
 		for(i=1;i<=4;i++) 
 		{
@@ -111,7 +213,7 @@ int main(void)
 					break;
 			}
 
-		    //teste de toque	
+			//teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
 			{
 				if (teste_toque(mao_c,pm)) 
@@ -138,7 +240,7 @@ int main(void)
 				if (ver_b=='n')
 				{
 					printf("Jogador %d, posso mostrar sua mao agora?"
-						   " Digite \"s\" para sim.\n",jogador);
+							" Digite \"s\" para sim.\n",jogador);
 					getchar();
 				}
 				else printf("Jogador %d\n",jogador);
@@ -159,7 +261,7 @@ int main(void)
 			{
 				// "retira" peca escolhida da mao
 				for(j=0;j<=6;j++)
-	 				if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
+					if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
@@ -167,7 +269,7 @@ int main(void)
 				//teste de fim de jogo
 				if (teste_final(mao_c,jogador)) return 0;
 			}
-            tt=SEM_TOQUE;
+			tt=SEM_TOQUE;
 
 			jogador= (jogador % 4) +1; //troca de jogador	
 		} //fim do "for" para troca de jogadores	

@@ -94,24 +94,72 @@ int main(void)
 
 	passagens=0;
 	while(passagens!=7)
-    {
+	{
 		temporario= rand()%28;
 		if(jafoi[temporario]==0)
 		{
-		mao_2[x]=pecas[temporario];
-		jafoi[temporario]=1;
-		passagens++;
-		x++;
+			mao_2[x]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			x++;
 		}
 	}
 	printf("Sua mao:\n");
-	printf("(");
+	printf("{");
 	for(k=0;k<7;k++)
-    {
+	{
 		if(mao_2[k]==0)
-		printf("00,");
+			printf("00,");
 		else
-		printf("%d,", mao_2[k]);
+			printf("%d,", mao_2[k]);
+	}
+	printf("}");
+	printf("\n");
+
+	passagens=0;
+	while(passagens!=7)
+	{
+		temporario = rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_3[z]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			z++;
+		}
+	}
+	printf("Sua mao:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_3[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_3[k]);
+	}
+	printf("}");
+	printf("\n");
+
+	passagens=0;
+	while(passagens!=7)
+	{
+		temporario = rand()%28;
+		if(jafoi[temporario]==0)
+		{
+			mao_4[v]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			v++;
+		}
+	}
+	printf("Sua mao:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_4[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_4[k]);
 	}
 	printf("}");
 	printf("\n");

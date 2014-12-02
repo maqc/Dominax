@@ -32,6 +32,8 @@
 
 #include <stdio.h>
 #include "minhas_funcoes.h"
+#include <stdlib.h>
+#include <time.h>
 
 #define HOUVE_TOQUE 99
 #define SEM_TOQUE 0
@@ -66,132 +68,156 @@ int main(void)
 	int mao_4[7];
 	srand(time(NULL));
 
-		// sorteio das maos
-		while(passagens!=7)
-	    {
-			 temporario= rand()%28;
-			 if(jafoi[temporario]==0)
-			 {
-				 mao_1[y]=pecas[temporario];
-				 jafoi[temporario]=1;
-				 passagens++;
-				 y++;
-			 }
-	    }
-	    printf("Sua mao:\n");
-		printf("{");
-		for(k=0;k<7;k++)
-	    {
-			if(mao_1[k]==0)
-				printf("00,");
-			else
-				printf("%d,", mao_1[k]);
-		}
-		printf("}");
-		printf("\n");
-
-
-		// escolha do iniciante
-		while(p_jog < 1 || p_jog >4 )
+	// sorteio das maos
+	while(passagens!=7)
+	{
+		temporario= rand()%28;
+		if(jafoi[temporario]==0)
 		{
-			printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n"
-					"Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
-			scanf("%c",&ver_b);
-			printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
-			scanf("%d", &p_jog);
-			while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-			if (p_jog < 1 || p_jog > 4) 
-				printf("Voce escolheu uma opcao invalida.\n\n");
+			mao_1[y]=pecas[temporario];
+			jafoi[temporario]=1;
+			passagens++;
+			y++;
 		}
-		jogador = p_jog;
+	}
+	printf("Sua mao:\n");
+	printf("{");
+	for(k=0;k<7;k++)
+	{
+		if(mao_1[k]==0)
+			printf("00,");
+		else
+			printf("%d,", mao_1[k]);
+	}
+	printf("}");
+	printf("\n");
 
-		// rodadas
-		while(rodada <= MAX_RODADAS)
+	passagens=0;
+	while(passagens!=7)
+    {
+		temporario= rand()%28;
+		if(jafoi[temporario]==0)
 		{
-			printf("Rodada %d\n",rodada);
+		mao_2[x]=pecas[temporario];
+		jafoi[temporario]=1;
+		passagens++;
+		x++;
+		}
+	}
+	printf("Sua mao:\n");
+	printf("(");
+	for(k=0;k<7;k++)
+    {
+		if(mao_2[k]==0)
+		printf("00,");
+		else
+		printf("%d,", mao_2[k]);
+	}
+	printf("}");
+	printf("\n");
 
-			//troca de jogadores dentro de uma rodada
-			for(i=1;i<=4;i++) 
+
+	// escolha do iniciante
+	while(p_jog < 1 || p_jog >4 )
+	{
+		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n"
+				"Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
+		scanf("%c",&ver_b);
+		printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
+		scanf("%d", &p_jog);
+		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+		if (p_jog < 1 || p_jog > 4) 
+			printf("Voce escolheu uma opcao invalida.\n\n");
+	}
+	jogador = p_jog;
+
+	// rodadas
+	while(rodada <= MAX_RODADAS)
+	{
+		printf("Rodada %d\n",rodada);
+
+		//troca de jogadores dentro de uma rodada
+		for(i=1;i<=4;i++) 
+		{
+			switch(jogador)
 			{
-				switch(jogador)
+				case 1:
+					mao_c =mao_1;
+					break;
+				case 2:
+					mao_c =mao_2;
+					break;
+				case 3:
+					mao_c =mao_3;
+					break;
+				case 4:
+					mao_c =mao_4;
+					break;
+				default:
+					break;
+			}
+
+			//teste de toque	
+			if ( (rodada !=1) || (jogador != p_jog))
+			{
+				if (teste_toque(mao_c,pm)) 
 				{
-					case 1:
-						mao_c =mao_1;
-						break;
-					case 2:
-						mao_c =mao_2;
-						break;
-					case 3:
-						mao_c =mao_3;
-						break;
-					case 4:
-						mao_c =mao_4;
-						break;
-					default:
-						break;
+					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
+					mem_toq[jogador-1]=1;
+					t_peca =2; //ignora o teste de peca
+					tt= HOUVE_TOQUE; // variavel para ignorar etapas
 				}
+				else mem_toq[jogador-1]=0;
+			}
+			int soma=0;
+			for (j=0; j<=3;j++)
+				soma+=mem_toq[j];
+			if (soma==SEQ_TOQUES) 
+			{
+				contagem_maos(mao_1,mao_2,mao_3,mao_4);	
+				return 0;
+			}
 
-				//teste de toque	
-				if ( (rodada !=1) || (jogador != p_jog))
+			//protecao da mao
+			if (tt != HOUVE_TOQUE)
+			{
+				if (ver_b=='n')
 				{
-					if (teste_toque(mao_c,pm)) 
-					{
-						printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
-						mem_toq[jogador-1]=1;
-						t_peca =2; //ignora o teste de peca
-						tt= HOUVE_TOQUE; // variavel para ignorar etapas
-					}
-					else mem_toq[jogador-1]=0;
+					printf("Jogador %d, posso mostrar sua mao agora?"
+							" Digite \"s\" para sim.\n",jogador);
+					getchar();
 				}
-				int soma=0;
-				for (j=0; j<=3;j++)
-					soma+=mem_toq[j];
-				if (soma==SEQ_TOQUES) 
-				{
-					contagem_maos(mao_1,mao_2,mao_3,mao_4);	
-					return 0;
-				}
+				else printf("Jogador %d\n",jogador);
+				mostra_mao(mao_c);
+			}
 
-				//protecao da mao
-				if (tt != HOUVE_TOQUE)
-				{
-					if (ver_b=='n')
-					{
-						printf("Jogador %d, posso mostrar sua mao agora?"
-								" Digite \"s\" para sim.\n",jogador);
-						getchar();
-					}
-					else printf("Jogador %d\n",jogador);
-					mostra_mao(mao_c);
-				}
+			//leitura e testes de peca (existencia e compatibilidade com pontas de mesa)
+			while(t_peca !=2)
+			{
+				printf("Digite a peca que vc quer jogar: ");
+				scanf("%d",&peca);
+				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+				t_peca = teste_peca(peca,rodada,p_jog,pm,mao_c,jogador);
+			}
+			t_peca=0;
 
-				//leitura e testes de peca (existencia e compatibilidade com pontas de mesa)
-				while(t_peca !=2)
-				{
-					printf("Digite a peca que vc quer jogar: ");
-					scanf("%d",&peca);
-					while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-					t_peca = teste_peca(peca,rodada,p_jog,pm,mao_c,jogador);
-				}
-				t_peca=0;
+			if (tt != HOUVE_TOQUE)
+			{
+				// "retira" peca escolhida da mao
+				for(j=0;j<=6;j++)
+					if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
-				if (tt != HOUVE_TOQUE)
-				{
-					// "retira" peca escolhida da mao
-					for(j=0;j<=6;j++)
-						if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
+				//montagem das pontas de mesa
+				monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
 
-					//montagem das pontas de mesa
-					monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
+				//teste de fim de jogo
+				if (teste_final(mao_c,jogador)) return 0;
+			}
+			tt=SEM_TOQUE;
 
-					//teste de fim de jogo
-					if (teste_final(mao_c,jogador)) return 0;
-				}
-				tt=SEM_TOQUE;
-
-				jogador= (jogador % 4) +1; //troca de jogador	
-			} //fim do "for" para troca de jogadores	
-			rodada +=1;
-		}//fim do while
-		return 0;
-	} // main
+			jogador= (jogador % 4) +1; //troca de jogador	
+		} //fim do "for" para troca de jogadores	
+		rodada +=1;
+	}//fim do while
+	return 0;
+} // main

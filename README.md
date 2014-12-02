@@ -3,22 +3,22 @@ domino001
 
 Trabalho final de Informática - Time 1
 
-Lucas Canejo Jurema                     (canejo12)
+Lucas Canejo Jurema                     
 
-Rodrigo Borba                           (Rodrigo-Borba)
+Rodrigo Borba                           
 
-Marcus Vinicius Luna Dias               (Timbrau)
+Marcus Vinicius Luna Dias               
 
-Regina Gomes                            (ReginaGomes)
+Regina Gomes                            
 
-Lucas Pereira Calado                    (lpc1)
+Lucas Pereira Calado                    
 
-Lucas Borges                            (silva-borges)
+Lucas Borges                            
 
-Maximiliano Adolfo Quirino Costa        (maqc)
+Maximiliano Adolfo Quirino Costa        
 
-Viviane Sanguinett                      (vivianesanguinett)
+Viviane Sanguinett                      
 
-Gabriel Alfaya Sá Barreto               (gabrielalfaya)
+Gabriel Alfaya Sá Barreto               
 
-Arnold Felix Pereira                    (arnoldtorees)
+Arnold Felix Pereira                    

@@ -44,6 +44,8 @@ int main(void)
   	int i,j; //contadores
 	int tt;//teste de toque
 	int *mao_c; //apontador para a mao corrente
+	int mem_toq[4]={0,0,0,0};
+	char ver_b; //Versao beta
 
 	// escolha das maos
 	int mao_1[7]={50,54,64,55,60,31,20};
@@ -54,8 +56,10 @@ int main(void)
 	// escolha do iniciante
 	while(p_jog < 1 || p_jog >4 )
 	{
-		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n"
-			   "Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
+		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n"
+			   "Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
+		scanf("%c",&ver_b);
+		printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
 		scanf("%d", &p_jog);
 		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
 		if (p_jog < 1 || p_jog > 4) 
@@ -91,19 +95,35 @@ int main(void)
 
 		    //teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
+			{
 				if (teste_toque(mao_c,pm)) 
 				{
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
+					mem_toq[jogador-1]=1;
 					t_peca =2; //ignora o teste de peca
 					tt=99; // variavel para ignorar etapas
 				}
+				else mem_toq[jogador-1]=0;
+			}
+			int soma=0;
+			for (j=0; j<=3;j++)
+				soma+=mem_toq[j];
+			if (soma==4) 
+			{
+				contagem_maos(mao_1,mao_2,mao_3,mao_4);	
+				return 0;
+			}
 
 			//protecao da mao
 			if (tt !=99)
 			{
-				printf("Jogador %d, posso mostrar sua mão agora?"
-					   " Digite \"s\" para sim.\n",jogador);
-				getchar();
+				if (ver_b=='n')
+				{
+					printf("Jogador %d, posso mostrar sua mao agora?"
+						   " Digite \"s\" para sim.\n",jogador);
+					getchar();
+				}
+				else printf("Jogador %d\n",jogador);
 				mostra_mao(mao_c);
 			}
 
@@ -123,9 +143,8 @@ int main(void)
 				for(j=0;j<=6;j++)
 	 				if (mao_c[j] ==peca) mao_c[j]=99;
 
-				
 				//montagem das pontas de mesa
-				monta_pm(rodada,jogador,p_jog,peca,pm);
+				monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
 
 				//teste de fim de jogo
 				if (teste_final(mao_c,jogador)) return 0;

@@ -1,0 +1,253 @@
+\hypertarget{minhas__funcoes_8h}{\section{minhas\-\_\-funcoes.\-h File Reference}
+\label{minhas__funcoes_8h}\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}}
+}
+
+
+Lista os protótipos para funções usadas no arquivo \hyperlink{domino001_8c}{domino001.\-c}.  
+
+
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{minhas__funcoes_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{minhas__funcoes_8h_a2c7464c4fbe10dbd7c2c02a229914100}{mostra\-\_\-mao} (int mao\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Mostra a mão de um jogador. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a19c94da02c7e4a18f8f2e026bc6e217a}{monta\-\_\-pm} (int rodada, int jogador, int p\-\_\-jog, int peca, int pm\mbox{[}$\,$\mbox{]}, char ver\-\_\-b)
+\begin{DoxyCompactList}\small\item\em Monta as pontas da mesa. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a515f540c3151bb39d2f925b64dbbc158}{teste\-\_\-toque} (int mao\mbox{[}$\,$\mbox{]}, int pm\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Testa o se o jogador corrente tocou. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a3d41e803011fcca666084e33be7c9f76}{teste\-\_\-final} (int mao\mbox{[}$\,$\mbox{]}, int jogador)
+\begin{DoxyCompactList}\small\item\em Testa se o jogador corrente venceu a partida. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a565d3c574cac7026f027b735cae67eb6}{teste\-\_\-peca} (int peca, int rodada, int p\-\_\-jog, int pm\mbox{[}$\,$\mbox{]}, int mao\mbox{[}$\,$\mbox{]}, int jogador)
+\begin{DoxyCompactList}\small\item\em Testa a viabilidade da peça escolhida pelo usuário. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a24f9e5d78c956b61cbfaae1e392ce781}{contagem\-\_\-maos} (int mao\-\_\-1\mbox{[}$\,$\mbox{]}, int mao\-\_\-2\mbox{[}$\,$\mbox{]}, int mao\-\_\-3\mbox{[}$\,$\mbox{]}, int mao\-\_\-4\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Conta o total de pontos, para cada jogador, contigo na sua mão. \end{DoxyCompactList}\item 
+int \hyperlink{minhas__funcoes_8h_a691920d8572c75548b5a694c1e75107e}{sorteio\-\_\-maos} (int mao\-\_\-1\mbox{[}$\,$\mbox{]}, int mao\-\_\-2\mbox{[}$\,$\mbox{]}, int mao\-\_\-3\mbox{[}$\,$\mbox{]}, int mao\-\_\-4\mbox{[}$\,$\mbox{]}, char ver\-\_\-b)
+\begin{DoxyCompactList}\small\item\em Distribui as peças aleatoriamente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Lista os protótipos para funções usadas no arquivo \hyperlink{domino001_8c}{domino001.\-c}. \begin{DoxyVersion}{Version}
+3.\-0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03/12/2014 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+M\-A\-X\-I\-M\-I\-L\-I\-A\-N\-O A\-D\-O\-L\-F\-O 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2014 G\-N\-U G\-P\-L v3 $\ast$\-This program is free software; you can redistribute it and/or modify $\ast$it under the terms of the G\-N\-U General Public License as published by $\ast$the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+\end{DoxyCopyright}
+$\ast$\-This program is distributed in the hope that it will be useful, $\ast$but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of $\ast$\-M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the $\ast$\-G\-N\-U General Public License for more details.
+
+$\ast$\-You should have received a copy of the G\-N\-U General Public License $\ast$along with this program; if not, write to the $\ast$\-Free Software Foundation, Inc., $\ast$59 Temple Place -\/ Suite 330, Boston, M\-A 02111-\/1307, U\-S\-A. $\ast$\-Or read it online at $<$\href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}$>$. 
+
+Definition in file \hyperlink{minhas__funcoes_8h_source}{minhas\-\_\-funcoes.\-h}.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{minhas__funcoes_8h_a24f9e5d78c956b61cbfaae1e392ce781}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!contagem\-\_\-maos@{contagem\-\_\-maos}}
+\index{contagem\-\_\-maos@{contagem\-\_\-maos}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{contagem\-\_\-maos}]{\setlength{\rightskip}{0pt plus 5cm}int contagem\-\_\-maos (
+\begin{DoxyParamCaption}
+\item[{int}]{mao\-\_\-1\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-2\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-3\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-4\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a24f9e5d78c956b61cbfaae1e392ce781}
+
+
+Conta o total de pontos, para cada jogador, contigo na sua mão. 
+
+Essa função verifica qual jogador tem menos pontos (e portanto $\ast$o vencedor) após todos os quatro terem tocado. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mao\-\_\-1} & Armazena as peças da mão do jogador 1. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-2} & Armazena as peças da mão do jogador 2. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-3} & Armazena as peças da mão do jogador 3. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-4} & Armazena as peças da mão do jogador 4. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file contagem\-\_\-maos.\-c.
+
+\hypertarget{minhas__funcoes_8h_a19c94da02c7e4a18f8f2e026bc6e217a}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!monta\-\_\-pm@{monta\-\_\-pm}}
+\index{monta\-\_\-pm@{monta\-\_\-pm}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{monta\-\_\-pm}]{\setlength{\rightskip}{0pt plus 5cm}int monta\-\_\-pm (
+\begin{DoxyParamCaption}
+\item[{int}]{rodada, }
+\item[{int}]{jogador, }
+\item[{int}]{p\-\_\-jog, }
+\item[{int}]{peca, }
+\item[{int}]{pm\mbox{[}$\,$\mbox{]}, }
+\item[{char}]{ver\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a19c94da02c7e4a18f8f2e026bc6e217a}
+
+
+Monta as pontas da mesa. 
+
+Imprime na tela os valores das pontas das peças localizadas nas duas $\ast$extremidades da cadeia de peças. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rodada} & Armazena a rodada corrente. \\
+\hline
+\mbox{\tt in}  & {\em jogador} & Armazena o jogador corrente. \\
+\hline
+\mbox{\tt in}  & {\em p\-\_\-jog} & Registra o jogador que inicia a partida. \\
+\hline
+\mbox{\tt in}  & {\em peca} & Armazena a peça. \\
+\hline
+\mbox{\tt in}  & {\em pm} & Armazena separadamente o valor das extremidades da mesa. \\
+\hline
+\mbox{\tt in}  & {\em ver\-\_\-b} & Contém a versão do jogo, se é a beta ou não. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file monta\-\_\-pm.\-c.
+
+\hypertarget{minhas__funcoes_8h_a2c7464c4fbe10dbd7c2c02a229914100}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!mostra\-\_\-mao@{mostra\-\_\-mao}}
+\index{mostra\-\_\-mao@{mostra\-\_\-mao}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{mostra\-\_\-mao}]{\setlength{\rightskip}{0pt plus 5cm}int mostra\-\_\-mao (
+\begin{DoxyParamCaption}
+\item[{int}]{mao\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a2c7464c4fbe10dbd7c2c02a229914100}
+
+
+Mostra a mão de um jogador. 
+
+Imprime na tela a mão de um jogador. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mao} & Armazena as peças da mão de um jogador. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file mostra\-\_\-mao.\-c.
+
+\hypertarget{minhas__funcoes_8h_a691920d8572c75548b5a694c1e75107e}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!sorteio\-\_\-maos@{sorteio\-\_\-maos}}
+\index{sorteio\-\_\-maos@{sorteio\-\_\-maos}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{sorteio\-\_\-maos}]{\setlength{\rightskip}{0pt plus 5cm}int sorteio\-\_\-maos (
+\begin{DoxyParamCaption}
+\item[{int}]{mao\-\_\-1\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-2\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-3\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\-\_\-4\mbox{[}$\,$\mbox{]}, }
+\item[{char}]{ver\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a691920d8572c75548b5a694c1e75107e}
+
+
+Distribui as peças aleatoriamente. 
+
+Essa função simula o sorteio de peças feito no início de $\ast$uma partida de xadrez. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mao\-\_\-1} & Armazena as peças da mão do jogador 1. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-2} & Armazena as peças da mão do jogador 2. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-3} & Armazena as peças da mão do jogador 3. \\
+\hline
+\mbox{\tt in}  & {\em mao\-\_\-4} & Armazena as peças da mão do jogador 4. \\
+\hline
+\mbox{\tt in}  & {\em ver\-\_\-b} & Contém a versão do jogo, se é a beta ou não. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 65 of file random.\-c.
+
+\hypertarget{minhas__funcoes_8h_a3d41e803011fcca666084e33be7c9f76}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!teste\-\_\-final@{teste\-\_\-final}}
+\index{teste\-\_\-final@{teste\-\_\-final}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{teste\-\_\-final}]{\setlength{\rightskip}{0pt plus 5cm}int teste\-\_\-final (
+\begin{DoxyParamCaption}
+\item[{int}]{mao\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{jogador}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a3d41e803011fcca666084e33be7c9f76}
+
+
+Testa se o jogador corrente venceu a partida. 
+
+Função que verifica se o jogador corrente ainda tem alguma peça na $\ast$sua mão, encontrando assim o jogador vitorioso. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mao} & Armazena as peças da mão do jogador corrente. \\
+\hline
+\mbox{\tt in}  & {\em jogador} & Armazena o jogador corrente. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file teste\-\_\-final.\-c.
+
+\hypertarget{minhas__funcoes_8h_a565d3c574cac7026f027b735cae67eb6}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!teste\-\_\-peca@{teste\-\_\-peca}}
+\index{teste\-\_\-peca@{teste\-\_\-peca}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{teste\-\_\-peca}]{\setlength{\rightskip}{0pt plus 5cm}int teste\-\_\-peca (
+\begin{DoxyParamCaption}
+\item[{int}]{peca, }
+\item[{int}]{rodada, }
+\item[{int}]{p\-\_\-jog, }
+\item[{int}]{pm\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mao\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{jogador}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a565d3c574cac7026f027b735cae67eb6}
+
+
+Testa a viabilidade da peça escolhida pelo usuário. 
+
+Verifica se a peça escolhida existe, e existindo se ela pode ser $\ast$lançada numa das extremidades da mesa. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em peca} & Armazena a peça. \\
+\hline
+\mbox{\tt in}  & {\em rodada} & Armazena a rodada corrente. \\
+\hline
+\mbox{\tt in}  & {\em p\-\_\-jog} & Registra o jogador que inicia a partida. \\
+\hline
+\mbox{\tt in}  & {\em pm} & Armazena separadamente o valor das extremidades da mesa. \\
+\hline
+\mbox{\tt in}  & {\em mao} & Armazena as peças da mão do jogador corrente. \\
+\hline
+\mbox{\tt in}  & {\em jogador} & Armazena o jogador corrente. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file teste\-\_\-peca.\-c.
+
+\hypertarget{minhas__funcoes_8h_a515f540c3151bb39d2f925b64dbbc158}{\index{minhas\-\_\-funcoes.\-h@{minhas\-\_\-funcoes.\-h}!teste\-\_\-toque@{teste\-\_\-toque}}
+\index{teste\-\_\-toque@{teste\-\_\-toque}!minhas_funcoes.h@{minhas\-\_\-funcoes.\-h}}
+\subsubsection[{teste\-\_\-toque}]{\setlength{\rightskip}{0pt plus 5cm}int teste\-\_\-toque (
+\begin{DoxyParamCaption}
+\item[{int}]{mao\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{pm\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{minhas__funcoes_8h_a515f540c3151bb39d2f925b64dbbc158}
+
+
+Testa o se o jogador corrente tocou. 
+
+Verifica se existe alguma peça na mão do jogador que possa ser $\ast$lançada numa das extremidades da mesa. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mao} & Armazena as peças da mão do jogador corrente. \\
+\hline
+\mbox{\tt in}  & {\em pm} & Armazena separadamente o valor das extremidades da mesa. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file teste\-\_\-toque.\-c.
+

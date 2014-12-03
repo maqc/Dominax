@@ -1,8 +1,8 @@
 /* ************************************************************************ *
- *    Domino001, versão 1.0                                                 *
+ *    Domino001, versão 3.0                                                 *
  *    Programa feito para jogar domino                                      *
  *                                                                          *
- *    Copyright (C) 20XX by LUCAS CANEJO, RODRIGO BORBA, MARCUS VINICIUS,   *
+ *    Copyright (C) 2014 by LUCAS CANEJO, RODRIGO BORBA, MARCUS VINICIUS,   *
  *    REGINA GOMES, LUCAS CALADO, LUCAS BORGES, MAXIMILIANO ADOLFO,         *
  *    VIVIANE SANGUINETT, GABRIEL ALFAYA, ANORLD FELIX                      *
  *                                                                          *
@@ -22,11 +22,41 @@
  *    59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  *    Or read it online at <<http://www.gnu.org/licenses/>>.                *
  *                                                                          *
- *    To contact the author, please write to:                               *
- *    AUTHORs_NAME <AUTHORs_EMAIL>                                          *
- *    Webpage: WEB_PAGE                                                     *
- *    Phone: PHONE_NUMBER                                                   *
+ *    To contact the authors, please write to:                              *
+ *    Maximiliano Costa                                                     *
+ *    Email: maxquirinog@gmail.com                                          *
  * ************************************************************************ *
+ *
+ */
+
+/**
+ *\file domino001.c
+ *\ingroup GrupoÚnico
+ *\brief Programa Domino001.
+ *\details Esse é o arquivo principa do programa Dominó 1.
+ *Ela permite iniciamente a escolha entre a versão de desenvolvimento (beta) ou a
+ *versão para um usuário final. 
+ *\version 3.0
+ *\date 03/12/2014
+ *\author LUCAS CANEJO, RODRIGO BORBA, MARCUS VINICIUS,   
+ *    REGINA GOMES, LUCAS CALADO, LUCAS BORGES, MAXIMILIANO ADOLFO,         
+ *    VIVIANE SANGUINETT, GABRIEL ALFAYA, ANORLD FELIX
+ *\copyright (c) 2014 GNU GPL v3
+ *This program is free software; you can redistribute it and/or modify  
+ *it under the terms of the GNU General Public License as published by  
+ *the Free Software Foundation; either version 2 of the License, or     
+ *(at your option) any later version.                                   
+ *                                                                         
+ *This program is distributed in the hope that it will be useful,       
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of        
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         
+ *GNU General Public License for more details.                          
+ *                                                                          
+ *You should have received a copy of the GNU General Public License     
+ *along with this program; if not, write to the                         
+ *Free Software Foundation, Inc.,                                       
+ *59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             
+ *Or read it online at <<http://www.gnu.org/licenses/>>.
  *
  */
 
@@ -34,7 +64,8 @@
 #include "minhas_funcoes.h"
 #include <stdlib.h>
 
-#define HOUVE_TOQUE 99
+///\cond DEBUG
+#define HOUVE_TOQUE 99 ///Constante para indicar a ocorrência de toque.
 #define SEM_TOQUE 0
 #define PECA_RETIRADA 99
 #define PECA_INEXISTENTE 9
@@ -42,20 +73,22 @@
 #define SEM_JOGADOR 50
 #define MAX_RODADAS 100 //numero maximo de rodadas
 #define SEQ_TOQUES 4  //sequencia maxima de toques consecutivos
+///\endcond
 
 /**
- *\file domino001.c
- *\brief Arquivo principal do programa Domino001
+ *\ingroup GrupoÚnico
+ *\brief Função Principal
+ *\details Função que controla o fluxo de dados do programa.
+ *\retval EXIT_FAILURE se tudo der certo
+ *\retval EXIT_FAILURE Se ocorreu um erro.
  *
- *Esse programa foi desenvolvido para permitir uma partida de dominó
- *entre 4 jogadores humanos. Ele permite iniciamente a escolha entre
- *a versão de desenvolvimento (beta) ou a versão usuário final. 
- *
+ *\bug Desconhecido
  */
+
 int main(void)
 {
 	int jogador;
-	int p_jog= SEM_JOGADOR; //primeiro jogador
+	int p_jog= SEM_JOGADOR;//primeiro jogador
 	int t_peca=0; //testes de peca
 	int peca=PECA_INEXISTENTE;
 	int rodada=1;

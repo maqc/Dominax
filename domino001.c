@@ -97,18 +97,16 @@ int main(void)
 	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
 	int mem_toq[4]={0,0,0,0}; //memoria de toque
-	char ver_b; //Versao beta
 	int mao_1[7];
 	int mao_2[7];
 	int mao_3[7];
 	int mao_4[7];
 
-	// escolha do iniciante
+	printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n");
+
+	//escolha do iniciante
 	while(p_jog < 1 || p_jog >4 )
 	{
-		printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n"
-				"Digite \"s\" para ativar a versao beta ou \"n\" caso contrario.\n");
-		scanf("%c",&ver_b);
 		printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
 		scanf("%d", &p_jog);
 		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
@@ -118,7 +116,7 @@ int main(void)
 	jogador = p_jog;
 
 	//Sorteio das maos
-	sorteio_maos(mao_1,mao_2,mao_3,mao_4,ver_b);
+	sorteio_maos(mao_1,mao_2,mao_3,mao_4);
 
 	// rodadas
 	while(rodada <= MAX_RODADAS)
@@ -170,7 +168,7 @@ int main(void)
 			//protecao da mao
 			if (tt != HOUVE_TOQUE)
 			{
-				if (ver_b=='n')
+				if (!DEBUG)
 				{
 					printf("Jogador %d, posso mostrar sua mao agora?"
 							" Digite \"s\" para sim.\n",jogador);
@@ -197,7 +195,7 @@ int main(void)
 					if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
 				//montagem das pontas de mesa
-				monta_pm(rodada,jogador,p_jog,peca,pm,ver_b);
+				monta_pm(rodada,jogador,p_jog,peca,pm);
 
 				//teste de fim de jogo
 				if (teste_final(mao_c,jogador)) return 0;

@@ -60,16 +60,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char ver_b)
+#define SEM_LADO 'a'
+#define LIMPA_TELA printf("\n")
+
+int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 {
 	int pp_1,pp_2; //pontas de peca
-	char lado;
-	char command[50]; //recebe comando para o sistema
+	char lado=SEM_LADO;
 
 	//separacao das pontas de peca
 	pp_1=peca/10;
 	pp_2=peca-pp_1*10;
 
+	//Escolha das pontas de mesa para a primeira peça lançada no jogo.
  	if(rodada ==1 && jogador== p_jog)
 		{
 			pm[0]=pp_1;
@@ -77,13 +80,20 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char ver_b)
 		}
 	else
 	{
+		//Opções de lado quando as pontas de peça coincidem com as pontas de mesa.
     	if((pp_1==pm[0] && pp_2==pm[1]) || (pp_1==pm[1] && pp_2==pm[0]))
 		{
-			printf("Digite \"d\" para escolher o lado direito da mesa"
-				   " ou \"e\" para o lado esquerdo.\n");
-			scanf("%c",&lado);
-			while(getchar() != '\n') getchar(); //esvaziamento de buffer
+			while (lado != 'e' && lado != 'd')
+			{
+				printf("Digite \"d\" para escolher o lado direito da mesa "
+				       "ou \"e\" para o lado esquerdo.\n");
+				scanf("%c",&lado);
+				while(getchar() != '\n') getchar(); //esvaziamento de buffer
+				if (lado != 'e' && lado != 'd') 
+					printf("VOCE DIGITOU UM CARACTER DIFERENTE DO ESPERADO.\n\n");
+			}
 
+			
 			if(lado=='d')
 			{
 				if(pm[1] ==pp_1) pm[1]=pp_2;
@@ -95,6 +105,7 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char ver_b)
 				else pm[0]=pp_1;
 		    }
 		}
+		//Busca de uma coincidência entre pontas de peça e pontas de mesa.
 	 	else
 	 	{
 		
@@ -105,10 +116,11 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char ver_b)
 	 	}
 	}
 	//rolagem de tela
-	if(ver_b=='n')
+	if(!DEBUG)
 	{
-		sprintf(command,"clear");
-		system(command);
+		int i;
+		for (i=1;i<70;i++)
+			LIMPA_TELA;
 	}	
 
 	printf("Pontas da mesa: %d | %d\n\n",pm[0], pm[1]);

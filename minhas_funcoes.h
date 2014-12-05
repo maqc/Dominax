@@ -78,7 +78,7 @@ int mostra_mao(int mao[]);
  *\param[in] ver_b Contém a versão do jogo, se é a beta ou não.
  * 
  */
-int monta_pm(int rodada,int jogador,int p_jog,int peca,int pm[],char ver_b);
+int monta_pm(int rodada,int jogador,int p_jog,int peca,int pm[]);
 
 /**
  *\ingroup GrupoÚnico
@@ -142,4 +142,4 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[]);
  *\param[in] ver_b Contém a versão do jogo, se é a beta ou não.
  * 
  */
-int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b);
+int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[]);

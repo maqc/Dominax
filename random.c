@@ -62,7 +62,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b)
+int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[])
 {
 	int y=0,x=0,z=0,v=0,k;
 	int passagens=0, temporario;
@@ -84,7 +84,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b)
 			y++;
 		}
 	}
-	if (ver_b =='s')
+	if (DEBUG)
 	{
 		printf("jogador 1:\n");
 		printf("{");
@@ -113,7 +113,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b)
 		}
 	}
 
-	if (ver_b =='s')
+	if (DEBUG)
 	{
 		printf("jogador 2:\n");
 		printf("{");
@@ -142,7 +142,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b)
 		}
 	}
 
-	if (ver_b =='s')
+	if (DEBUG)
 	{
 		printf("Jogador 3:\n");
 		printf("{");
@@ -171,7 +171,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], char ver_b)
 		}
 	}
 
-	if (ver_b =='s')
+	if (DEBUG)
 	{
 		printf("Jogador 4:\n");
 		printf("{");

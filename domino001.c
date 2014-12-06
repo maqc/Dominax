@@ -184,7 +184,7 @@ int main(void)
 				printf("Digite a peca que vc quer jogar: ");
 				scanf("%d",&peca);
 				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-				t_peca = teste_peca(peca,rodada,p_jog,pm,mao_c,jogador);
+				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador);
 			}
 			t_peca=0;
 

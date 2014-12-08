@@ -171,7 +171,7 @@ int main(void)
 				if (!DEBUG)
 				{
 					printf("Jogador %d, posso mostrar sua mao agora?"
-							" Digite \"s\" para sim.\n",jogador);
+							" Pressione \"<ENTER>\" quando estiver pronto.\n",jogador);
 					getchar();
 				}
 				else printf("Jogador %d\n",jogador);

@@ -35,8 +35,8 @@
  *\brief Testa se o jogador corrente venceu a partida.
  *\details Função que verifica se o jogador corrente ainda tem alguma peça na
  *sua mão, encontrando assim o jogador vitorioso.
- *\version 3.0
- *\date 03/12/2014
+ *\version 4.0
+ *\date 09/12/2014
  *\author MAXIMILIANO ADOLFO
  *\copyright (c) 2014 GNU GPL v3
  *This program is free software; you can redistribute it and/or modify  
@@ -57,16 +57,18 @@
  *
 */
 
-
 #include <stdio.h>
 
-int teste_final(int mao[],int jogador)
+#define FIM1 693 //=7*99, onde 7=tamanho da mao, 99=valor da peça retirada
+#define FIM2 1386 //=14*99, onde 14=tamanho da mao, 99=valor da peça retirada
+
+int teste_final(int mao[],int jogador,int t_mao)
 {
 	int soma=0;
 	int i;
-	for(i=0;i<=6;i++)
+	for(i=0;i<=t_mao;i++)
 		soma+=mao[i];
-	if(soma == 693)
+	if(soma == FIM1 || soma ==FIM2)
 	{
 		printf("Fim de jogo, o jogador %d venceu!\n",jogador);
 		return 1;

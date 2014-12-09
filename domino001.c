@@ -68,11 +68,11 @@
 #define HOUVE_TOQUE 99 ///Constante para indicar a ocorrência de toque.
 #define SEM_TOQUE 0
 #define PECA_RETIRADA 99
+#define N_PECAS 28 // Número de peças de um jogo de dominó.
 #define PECA_INEXISTENTE 9
 #define PMV 9 //ponta de mesa vazia
 #define SEM_JOGADOR 50
 #define MAX_RODADAS 100 //numero maximo de rodadas
-#define SEQ_TOQUES 4  //sequencia maxima de toques consecutivos
 ///\endcond
 
 /**
@@ -97,26 +97,32 @@ int main(void)
 	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
 	int mem_toq[4]={0,0,0,0}; //memoria de toque
-	int mao_1[7];
-	int mao_2[7];
+	int mao_1[14]; 
+	int mao_2[14];
 	int mao_3[7];
 	int mao_4[7];
+	int t_mao; //tamanho da mão de um jogador
+	int n_jog= SEM_JOGADOR; //Número de jogadores
 
-	printf("\n\nVamos iniciar uma partida de domino com 4 jogadores humanos.\n\n");
+	printf("\n\nVamos iniciar uma partida de domino.\n\n");
+
+	printf("Sera uma partida com 2 ou com 4 jogadores?\n");
+	scanf("%d",&n_jog);
+	t_mao= N_PECAS/n_jog;
 
 	//escolha do iniciante
-	while(p_jog < 1 || p_jog >4 )
+	while(p_jog < 1 || p_jog > n_jog )
 	{
-		printf("Qual jogador iniciara? Digite qualquer numero de 1 a 4. \n");
+		printf("Qual jogador iniciara? Digite qualquer numero de 1 a %d. \n", n_jog);
 		scanf("%d", &p_jog);
 		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-		if (p_jog < 1 || p_jog > 4) 
+		if (p_jog < 1 || p_jog > n_jog ) 
 			printf("Voce escolheu uma opcao invalida.\n\n");
 	}
 	jogador = p_jog;
 
 	//Sorteio das maos
-	sorteio_maos(mao_1,mao_2,mao_3,mao_4);
+	sorteio_maos(mao_1,mao_2,mao_3,mao_4,n_jog);
 
 	// rodadas
 	while(rodada <= MAX_RODADAS)
@@ -124,8 +130,9 @@ int main(void)
 		printf("Rodada %d\n",rodada);
 
 		//troca de jogadores dentro de uma rodada
-		for(i=1;i<=4;i++) 
+		for(i=1;i<=n_jog;i++) 
 		{
+			
 			switch(jogador)
 			{
 				case 1:
@@ -147,21 +154,21 @@ int main(void)
 			//teste de toque	
 			if ( (rodada !=1) || (jogador != p_jog))
 			{
-				if (teste_toque(mao_c,pm)) 
+				if (teste_toque(mao_c,pm,t_mao)) 
 				{
 					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
 					mem_toq[jogador-1]=1;
-					t_peca =2; //ignora o teste de peca
+					t_peca =1; //ignora o teste de peca
 					tt= HOUVE_TOQUE; // variavel para ignorar etapas
 				}
 				else mem_toq[jogador-1]=0;
 			}
 			int soma=0;
-			for (j=0; j<=3;j++)
+			for (j=0; j<=n_jog ;j++)
 				soma+=mem_toq[j];
-			if (soma==SEQ_TOQUES) 
+			if (soma == n_jog) 
 			{
-				contagem_maos(mao_1,mao_2,mao_3,mao_4);	
+				contagem_maos(mao_1,mao_2,mao_3,mao_4,n_jog);	
 				return 0;
 			}
 
@@ -170,39 +177,39 @@ int main(void)
 			{
 				if (!DEBUG)
 				{
-					printf("Jogador %d, posso mostrar sua mao agora?"
-							" Pressione \"<ENTER>\" quando estiver pronto.\n",jogador);
+					printf("Jogador %d, posso mostrar sua mao agora? "
+						   "Pressione \"<ENTER>\" quando estiver pronto.\n",jogador);
 					getchar();
 				}
 				else printf("Jogador %d\n",jogador);
-				mostra_mao(mao_c);
+				mostra_mao(mao_c,t_mao);
 			}
 
 			//leitura e testes de peca (existencia e compatibilidade com pontas de mesa)
-			while(t_peca !=2)
+			while(t_peca != 1)
 			{
-				printf("Digite a peca que vc quer jogar: ");
+				printf("\nDigite a peca que vc quer jogar: ");
 				scanf("%d",&peca);
 				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador);
+				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador,t_mao);
 			}
 			t_peca=0;
 
 			if (tt != HOUVE_TOQUE)
 			{
 				// "retira" peca escolhida da mao
-				for(j=0;j<=6;j++)
+				for(j=0;j<= t_mao;j++)
 					if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm);
 
 				//teste de fim de jogo
-				if (teste_final(mao_c,jogador)) return 0;
+				if (teste_final(mao_c,jogador,t_mao)) return 0;
 			}
 			tt=SEM_TOQUE;
 
-			jogador= (jogador % 4) +1; //troca de jogador	
+			jogador= (jogador % n_jog) +1; //troca de jogador	
 		} //fim do "for" para troca de jogadores	
 		rodada +=1;
 	}//fim do while

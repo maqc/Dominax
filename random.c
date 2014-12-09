@@ -57,134 +57,70 @@
  *
 */
 
-
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
 
-int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[])
+int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[],int n_jog)
 {
-	int y=0,x=0,z=0,v=0,k;
-	int passagens=0, temporario;
+	int passagens=0;
+	int temporario;
 	int pecas[28]= {0,10,20,30,40,50,60,11,21,31,41,51,61,22,32,42,52,62,33,43,53,63,44,54,64,55,65,66};
 	int jafoi[28]={0};
+	int *mao_c;
+	int t_mao= 28/n_jog; //tamanho da mao
+ 	int j,k,y; //contadores 
 
- 	srand(time(NULL));
-
-	// sorteio das maos
-	while(passagens!=7)
+	//Seleção do jogador
+	for(j=1; j <= n_jog; j++)
 	{
-		temporario= rand()%28;
-		if(jafoi[temporario]==0)
+		switch(j)
+		{
+			case 1:
+				mao_c =mao_1;
+				break;
+			case 2:
+				mao_c =mao_2;
+				break;
+			case 3:
+				mao_c =mao_3;
+				break;
+			case 4:
+				mao_c =mao_4;
+				break;
+			default:
+				break;
+		}	
 		
+		// sorteio das maos
+		srand(time(NULL));
+    	passagens=0;
+		y=0;
+		while(passagens!= t_mao)
 		{
-			mao_1[y]=pecas[temporario];
-			jafoi[temporario]=1;
-			passagens++;
-			y++;
+			temporario= rand()%28;
+			if(jafoi[temporario]==0)
+			{
+				mao_c[y]=pecas[temporario];
+				jafoi[temporario]=1;
+				passagens++;
+				y++;
+			}
+		}
+		if (DEBUG)
+		{
+			printf("jogador %d:\n",j);
+			printf("{");
+			for(k=0;k<t_mao;k++)
+			{
+				if(mao_c[k]==0)
+					printf("00,");
+				else
+					printf("%d,", mao_c[k]);
+			}
+			printf("}");
+			printf("\n");
 		}
 	}
-	if (DEBUG)
-	{
-		printf("jogador 1:\n");
-		printf("{");
-		for(k=0;k<7;k++)
-		{
-			if(mao_1[k]==0)
-				printf("00,");
-			else
-				printf("%d,", mao_1[k]);
-		}
-		printf("}");
-		printf("\n");
-	}
-
-	passagens=0;
-	while(passagens!=7)
-	{
-		temporario= rand()%28;
-		if(jafoi[temporario]==0)
-		{
-			mao_2[x]=pecas[temporario];
-			jafoi[temporario]=1;
-			passagens++;
-			x++;
-		
-		}
-	}
-
-	if (DEBUG)
-	{
-		printf("jogador 2:\n");
-		printf("{");
-		for(k=0;k<7;k++)
-		{
-			if(mao_2[k]==0)
-				printf("00,");
-			else
-				printf("%d,", mao_2[k]);
-		}
-		printf("}");
-		printf("\n");
-	}
-
-	passagens=0;
-	while(passagens!=7)
-	{
-		temporario = rand()%28;
-		if(jafoi[temporario]==0)
-		
-		{
-			mao_3[z]=pecas[temporario];
-			jafoi[temporario]=1;
-			passagens++;
-			z++;
-		}
-	}
-
-	if (DEBUG)
-	{
-		printf("Jogador 3:\n");
-		printf("{");
-		for(k=0;k<7;k++)
-		{
-			if(mao_3[k]==0)
-				printf("00,");
-			else
-				printf("%d,", mao_3[k]);
-		}
-		printf("}");
-		printf("\n");
-	}
-
-	passagens=0;
-	while(passagens!=7)
-	{
-		temporario = rand()%28;
-		if(jafoi[temporario]==0)
-		{
-			mao_4[v]=pecas[temporario];
-			jafoi[temporario]=1;
-			passagens++;
-			v++;
-
-		}
-	}
-
-	if (DEBUG)
-	{
-		printf("Jogador 4:\n");
-		printf("{");
-		for(k=0;k<7;k++)
-		{
-			if(mao_4[k]==0)
-				printf("00,");
-			else
-				printf("%d,", mao_4[k]);
-		}
-		printf("}");
-		printf("\n");
-	}
-	
 	return 0;
 }

@@ -35,8 +35,8 @@
  *\brief Testa o se o jogador corrente tocou.
  *\details Verifica se existe alguma peça na mão do jogador que possa ser 
  *lançada numa das extremidades da mesa.
- *\version 3.0
- *\date 03/12/2014
+ *\version 4.0
+ *\date 08/12/2014
  *\author MAXIMILIANO ADOLFO
  *\copyright (c) 2014 GNU GPL v3
  *This program is free software; you can redistribute it and/or modify  
@@ -57,13 +57,13 @@
  *
 */
 
-int teste_toque(int mao[],int pm[])
+int teste_toque(int mao[],int pm[],int t_mao)
 {
 	int peca;
 	int i, contador=0; //contadores
 	int pp_1, pp_2; //pontas de peca
 
-	for(i=0;i<=6;i++)
+	for(i=0;i< t_mao;i++)
 	{
 		peca = mao[i];
 

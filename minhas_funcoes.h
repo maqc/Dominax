@@ -61,9 +61,10 @@
  *\brief Mostra a mão de um jogador.
  *\details Imprime na tela a mão de um jogador.
  *\param[in] mao Armazena as peças da mão de um jogador.
+ *\param[in] t_mao Tamanho da mão de um jogador.
  *
  */
-int mostra_mao(int mao[]);
+int mostra_mao(int mao[],int t_mao);
 
 /**
  *\ingroup GrupoÚnico
@@ -87,9 +88,10 @@ int monta_pm(int rodada,int jogador,int p_jog,int peca,int pm[]);
  *lançada numa das extremidades da mesa.
  *\param[in] mao Armazena as peças da mão do jogador corrente.
  *\param[in] pm  Armazena separadamente o valor das extremidades da mesa.
+ *\param[in] t_mao Tamanho da mão de um jogador.
  * 
  */
-int teste_toque(int mao[],int pm[]);
+int teste_toque(int mao[],int pm[], int t_mao);
 
 /**
  *\ingroup GrupoÚnico
@@ -98,9 +100,10 @@ int teste_toque(int mao[],int pm[]);
  *sua mão, encontrando assim o jogador vitorioso.
  *\param[in] mao Armazena as peças da mão do jogador corrente.
  *\param[in] jogador Armazena o jogador corrente.
+ *\param[in] t_mao Tamanho da mão de um jogador.
  * 
  */
-int teste_final(int mao[],int jogador);
+int teste_final(int mao[],int jogador,int t_mao);
 
 /**
  *\ingroup GrupoÚnico
@@ -113,9 +116,10 @@ int teste_final(int mao[],int jogador);
  *\param[in] pm	Armazena separadamente o valor das extremidades da mesa.
  *\param[in] mao Armazena as peças da mão do jogador corrente.
  *\param[in] jogador Armazena o jogador corrente.
+ *\param[in] t_mao Tamanho da mão de um jogador.
  * 
  */
-int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador);
+int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao);
 
 /**
  *\ingroup GrupoÚnico
@@ -126,9 +130,10 @@ int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador);
  *\param[in] mao_2 Armazena as peças da mão do jogador 2.
  *\param[in] mao_3 Armazena as peças da mão do jogador 3.
  *\param[in] mao_4 Armazena as peças da mão do jogador 4.
+ *\param[in] n_jog Número de jogadores.
  * 
  */
-int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[]);
+int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog);
 
 /**
  *\ingroup GrupoÚnico
@@ -140,6 +145,8 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[]);
  *\param[in] mao_3 Armazena as peças da mão do jogador 3.
  *\param[in] mao_4 Armazena as peças da mão do jogador 4.
  *\param[in] ver_b Contém a versão do jogo, se é a beta ou não.
+ *\param[in] n_jog Número de jogadores.
  * 
  */
-int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[]);
+int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[], int n_jog);
+

@@ -59,15 +59,15 @@
 
 #include <stdio.h>
 
-int mostra_mao(int mao[])
+int mostra_mao(int mao[],int t_mao)
 {
     int i,j;
-	int UIV; //ultimo indice valido (entendade-se peca existente)
+	int UIV; //último índice válido (entenda-se peça existente)
 
 	printf("Sua mao: {");
-	for(i=0;i<=6;i++) 
+	for(i=0;i< t_mao;i++) 
 	{
-		for(j=0;j<=6;j++) 
+		for(j=0;j< t_mao;j++) 
 			if(mao[j]!=99) UIV=j;
 
         if (mao[i] ==0) printf("00"); 

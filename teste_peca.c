@@ -35,8 +35,8 @@
  *\brief Testa a viabilidade da peça escolhida pelo usuário.
  *\details Verifica se a peça escolhida existe, e existindo se ela pode ser 
  *lançada numa das extremidades da mesa.
- *\version 3.0
- *\date 03/12/2014
+ *\version 4.0
+ *\date 09/12/2014
  *\author MAXIMILIANO ADOLFO
  *\copyright (c) 2014 GNU GPL v3
  *This program is free software; you can redistribute it and/or modify  
@@ -60,39 +60,49 @@
 
 #include <stdio.h>
 
-int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador)
+int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao)
 {
 	int pp_1,pp_2; //pontas de peca
-	int t_peca=0;
+	int tp=0; //teste de pertencimento
+	int tc=0; //teste de coincidência
 	int peca2;
 	int j; //contador
 
-	//teste de pertencimento da peca a mao
-	for(j=0;j<=6;j++)
-		if(*peca == mao[j]) t_peca=1;
+	//teste de pertencimento da peça a mão
+	for(j=0;j<=t_mao;j++)
+		if(*peca == mao[j]) tp=1;
 	
 	pp_1= *peca/10;
 	pp_2= *peca-pp_1*10;
 	
-	if(t_peca==0)
+	if(tp==0)
 	{
 		peca2 = pp_1 + pp_2*10;
-		for(j=0;j<=6;j++)
+		for(j=0;j<t_mao;j++)
 			if(peca2 == mao[j])
 			{
-				t_peca=1;
+				tp=1;
 				*peca = peca2;
 			}
+	}
+
+	if (tp ==0)
+	{
+		printf("A peca que voce escolheu nao esta na sua mao.\n");
+		return 0;
 	}
 
 	//teste de coincidencia com as pontas de mesa
 	if(rodada==1 && jogador==p_jog) pm[0]=pp_1;
 
 	if(pp_1==pm[0]||pp_1==pm[1]||pp_2==pm[0]||pp_2==pm[1])
-		t_peca +=1;
+		tc =1;
 
-	if (t_peca !=2) 
-		printf("A peca que voce escolheu nao esta na sua mao"
-			   " ou nao coincide com as pontas de mesa.\n");
-	return t_peca;
+	if (tc ==0) 
+	{
+		printf("A peça nao coincide com as pontas de mesa.\n");
+		return 0;
+	}
+
+	return 1;
 }

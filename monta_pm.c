@@ -119,7 +119,7 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 	if(!DEBUG)
 	{
 		int i;
-		for (i=1;i<70;i++)
+		for (i=1;i<1000;i++)
 			LIMPA_TELA;
 	}	
 

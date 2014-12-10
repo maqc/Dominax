@@ -106,6 +106,8 @@ int main(void)
 	char t_jog[3];//tipo de jogador(humano ou máquina)
 	char tj;// armazena o tipo de jogador corrente
 	int njh=1;//número de jogadores humanos
+	char nomes[4][20];//Registra os nomes dos jogadores
+	char *nome; //Aponta para o nome do jogador corrente
 
 	printf("\n\nVamos iniciar uma partida de domino.\n\n");
 
@@ -114,18 +116,23 @@ int main(void)
 	t_mao= N_PECAS/n_jog;
 
 	//Seleção do tipo de jogador, humano ou máquina.
-	for(j=2;j<=n_jog;j++)
+	for(j=1;j<=n_jog;j++)
 	{
-		while(t_jog[j-2] !='h' && t_jog[j-2]!='m')
+		printf("Escreva o nome do jogador %d:\n",j);
+			scanf("%s",nomes[j-1]); printf("O nome escolhido foi %s\n",nomes[j-1]);
+		if(j>1)
 		{
-			printf("O jogador %d sera humano? Digite h para sim e m para nao.\n",j);
-			while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-			t_jog[j-2]=getchar();
+			while(t_jog[j-2] !='h' && t_jog[j-2]!='m')
+			{
+				printf("O jogador %d sera humano? Digite h para sim e m para nao.\n",j);
+				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+				t_jog[j-2]=getchar();
 
-			if(t_jog[j-2]=='h')
-				njh+=1;	
-			if(t_jog[j-2] !='h' && t_jog[j-2]!='m') 
-				printf("Voce digitou um caracter diferente de h e m.\n");
+				if(t_jog[j-2]=='h')
+					njh+=1;	
+				if(t_jog[j-2] !='h' && t_jog[j-2]!='m') 
+					printf("Voce digitou um caracter diferente de h e m.\n");
+			}
 		}
 	}
 
@@ -157,18 +164,22 @@ int main(void)
 				case 1:
 					mao_c =mao_1;
 					tj='h';
+					nome=nomes[0];
 					break;
 				case 2:
 					mao_c =mao_2;
 					tj=t_jog[0];
+					nome=nomes[1];
 					break;
 				case 3:
 					mao_c =mao_3;
 					tj=t_jog[1];
+					nome=nomes[2];
 					break;
 				case 4:
 					mao_c =mao_4;
 					tj=t_jog[2];
+					nome=nomes[3];
 					break;
 				default:
 					break;
@@ -179,7 +190,7 @@ int main(void)
 			{
 				if (teste_toque(mao_c,pm,t_mao)) 
 				{
-					printf("\nO JOGADOR %d TOCOU!\n\n",jogador);		
+					printf("\n%s TOCOU!\n\n",nome);		
 					mem_toq[jogador-1]=1;
 					t_peca =1; //ignora o teste de peca
 					tt= HOUVE_TOQUE; // variavel para ignorar etapas
@@ -200,11 +211,11 @@ int main(void)
 			{
 				if (!DEBUG && tj=='h' && njh>1)
 				{
-					printf("Jogador %d, posso mostrar sua mao agora? "
-						   "Pressione \"<ENTER>\" quando estiver pronto.\n",jogador);
+					printf("%s, posso mostrar sua mao agora? "
+						   "Pressione \"<ENTER>\" quando estiver pronto.\n",nome);
 					getchar();
 				}
-				else printf("Jogador %d\n",jogador);
+				else printf("%s\n",nome);
 
 				if(tj=='h' || DEBUG)
 					mostra_mao(mao_c,t_mao);

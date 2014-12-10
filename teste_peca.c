@@ -60,7 +60,7 @@
 
 #include <stdio.h>
 
-int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao)
+int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao,char tj)
 {
 	int pp_1,pp_2; //pontas de peca
 	int tp=0; //teste de pertencimento
@@ -69,7 +69,7 @@ int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int
 	int j; //contador
 
 	//teste de pertencimento da peça a mão
-	for(j=0;j<=t_mao;j++)
+	for(j=0;j<t_mao;j++)
 		if(*peca == mao[j]) tp=1;
 	
 	pp_1= *peca/10;
@@ -88,7 +88,8 @@ int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int
 
 	if (tp ==0)
 	{
-		printf("A peca que voce escolheu nao esta na sua mao.\n");
+		if(tj=='h')
+			printf("A peca que voce escolheu nao esta na sua mao.\n");
 		return 0;
 	}
 
@@ -98,9 +99,10 @@ int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int
 	if(pp_1==pm[0]||pp_1==pm[1]||pp_2==pm[0]||pp_2==pm[1])
 		tc =1;
 
-	if (tc ==0) 
+	if (tc==0) 
 	{
-		printf("A peça nao coincide com as pontas de mesa.\n");
+		if(tj=='h')
+			printf("A peça nao coincide com as pontas de mesa.\n");
 		return 0;
 	}
 

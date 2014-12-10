@@ -60,7 +60,7 @@
 int teste_toque(int mao[],int pm[],int t_mao)
 {
 	int peca;
-	int i, contador=0; //contadores
+	int i=0; //contador
 	int pp_1, pp_2; //pontas de peca
 
 	for(i=0;i< t_mao;i++)
@@ -72,8 +72,7 @@ int teste_toque(int mao[],int pm[],int t_mao)
 		pp_2=peca-pp_1*10;
 
 		if(pp_1 == pm[0] || pp_1 == pm[1] || pp_2 == pm[0] || pp_2 == pm[1])
-			contador +=1;
-		if (contador != 0) return 0;
+			return 0;
 	}
 	return 1;
 }

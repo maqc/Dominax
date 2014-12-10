@@ -103,12 +103,31 @@ int main(void)
 	int mao_4[7];
 	int t_mao; //tamanho da mão de um jogador
 	int n_jog= SEM_JOGADOR; //Número de jogadores
+	char t_jog[3];//tipo de jogador(humano ou máquina)
+	char tj;// armazena o tipo de jogador corrente
+	int njh=1;//número de jogadores humanos
 
 	printf("\n\nVamos iniciar uma partida de domino.\n\n");
 
 	printf("Sera uma partida com 2 ou com 4 jogadores?\n");
 	scanf("%d",&n_jog);
 	t_mao= N_PECAS/n_jog;
+
+	//Seleção do tipo de jogador, humano ou máquina.
+	for(j=2;j<=n_jog;j++)
+	{
+		while(t_jog[j-2] !='h' && t_jog[j-2]!='m')
+		{
+			printf("O jogador %d sera humano? Digite h para sim e m para nao.\n",j);
+			while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+			t_jog[j-2]=getchar();
+
+			if(t_jog[j-2]=='h')
+				njh+=1;	
+			if(t_jog[j-2] !='h' && t_jog[j-2]!='m') 
+				printf("Voce digitou um caracter diferente de h e m.\n");
+		}
+	}
 
 	//escolha do iniciante
 	while(p_jog < 1 || p_jog > n_jog )
@@ -137,15 +156,19 @@ int main(void)
 			{
 				case 1:
 					mao_c =mao_1;
+					tj='h';
 					break;
 				case 2:
 					mao_c =mao_2;
+					tj=t_jog[0];
 					break;
 				case 3:
 					mao_c =mao_3;
+					tj=t_jog[1];
 					break;
 				case 4:
 					mao_c =mao_4;
+					tj=t_jog[2];
 					break;
 				default:
 					break;
@@ -164,7 +187,7 @@ int main(void)
 				else mem_toq[jogador-1]=0;
 			}
 			int soma=0;
-			for (j=0; j<=n_jog ;j++)
+			for (j=0; j< n_jog ;j++)
 				soma+=mem_toq[j];
 			if (soma == n_jog) 
 			{
@@ -175,34 +198,52 @@ int main(void)
 			//protecao da mao
 			if (tt != HOUVE_TOQUE)
 			{
-				if (!DEBUG)
+				if (!DEBUG && tj=='h' && njh>1)
 				{
 					printf("Jogador %d, posso mostrar sua mao agora? "
 						   "Pressione \"<ENTER>\" quando estiver pronto.\n",jogador);
 					getchar();
 				}
 				else printf("Jogador %d\n",jogador);
-				mostra_mao(mao_c,t_mao);
+
+				if(tj=='h' || DEBUG)
+					mostra_mao(mao_c,t_mao);
 			}
 
 			//leitura e testes de peca (existencia e compatibilidade com pontas de mesa)
+			j=0;
 			while(t_peca != 1)
 			{
-				printf("\nDigite a peca que vc quer jogar: ");
-				scanf("%d",&peca);
-				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
-				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador,t_mao);
+				if(tj=='h')
+				{
+					printf("\nDigite a peca que vc quer jogar: ");
+					scanf("%d",&peca);
+					while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+				}
+				else 
+				{
+					peca=mao_c[j];
+					j++;
+				}
+				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador,t_mao,tj);
+				if(t_peca==1 && tj=='m')
+				{
+					if(peca!=0) 
+						printf("A peca escolhida foi %d.\n",peca);
+					else
+						printf("A peca escolhida foi 00.\n");
+				}
 			}
 			t_peca=0;
 
 			if (tt != HOUVE_TOQUE)
 			{
-				// "retira" peca escolhida da mao
-				for(j=0;j<= t_mao;j++)
+				//"Retira" peca escolhida da mao
+				for(j=0;j< t_mao;j++)
 					if (mao_c[j] ==peca) mao_c[j]=PECA_RETIRADA;
 
 				//montagem das pontas de mesa
-				monta_pm(rodada,jogador,p_jog,peca,pm);
+				monta_pm(rodada,jogador,p_jog,peca,pm,tj,njh);
 
 				//teste de fim de jogo
 				if (teste_final(mao_c,jogador,t_mao)) return 0;

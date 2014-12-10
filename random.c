@@ -35,9 +35,9 @@
  *\brief Distribui as peças aleatoriamente.
  *\details Essa função simula o sorteio de peças feito no início de
  *uma partida de xadrez.
- *\version 3.0
+ *\version 4.0
  *\date 03/12/2014
- *\author LUCAS CANEJO, RODRIGO BORBA 
+ *\author LUCAS CANEJO, RODRIGO BORBA, MAXIMILIANO COSTA
  *\copyright (c) 2014 GNU GPL v3
  *This program is free software; you can redistribute it and/or modify  
  *it under the terms of the GNU General Public License as published by  
@@ -109,8 +109,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[],int n_jog)
 		}
 		if (DEBUG)
 		{
-			printf("jogador %d:\n",j);
-			printf("{");
+			printf("jogador %d:\n{",j);
 			for(k=0;k<t_mao;k++)
 			{
 				if(mao_c[k]==0)
@@ -118,8 +117,7 @@ int sorteio_maos(int mao_1[],int mao_2[],int mao_3[],int mao_4[],int n_jog)
 				else
 					printf("%d,", mao_c[k]);
 			}
-			printf("}");
-			printf("\n");
+			printf("}\n");
 		}
 	}
 	return 0;

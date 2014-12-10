@@ -34,8 +34,8 @@
  *\ingroup GrupoÚnico
  *\brief Lista os protótipos para funções usadas no arquivo domino001.c
  *\details  
- *\version 3.0
- *\date 03/12/2014
+ *\version 4.0
+ *\date 09/12/2014
  *\author MAXIMILIANO ADOLFO
  *\copyright (c) 2014 GNU GPL v3
  *This program is free software; you can redistribute it and/or modify  
@@ -77,9 +77,10 @@ int mostra_mao(int mao[],int t_mao);
  *\param[in] peca Armazena a peça.
  *\param[in] pm	Armazena separadamente o valor das extremidades da mesa.
  *\param[in] ver_b Contém a versão do jogo, se é a beta ou não.
- * 
+ *\param[in] tj Tipo de jogador, recebe h para humano e m para maquina.
+ *\param[in] njh Número de jogadores humanos. 
  */
-int monta_pm(int rodada,int jogador,int p_jog,int peca,int pm[]);
+int monta_pm(int rodada,int jogador,int p_jog,int peca,int pm[],char tj,int njh);
 
 /**
  *\ingroup GrupoÚnico
@@ -117,9 +118,10 @@ int teste_final(int mao[],int jogador,int t_mao);
  *\param[in] mao Armazena as peças da mão do jogador corrente.
  *\param[in] jogador Armazena o jogador corrente.
  *\param[in] t_mao Tamanho da mão de um jogador.
+ *\param[in] tj Tipo de jogador, recebe h para humano e m para maquina.
  * 
  */
-int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao);
+int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int t_mao,char tj);
 
 /**
  *\ingroup GrupoÚnico

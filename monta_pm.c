@@ -63,7 +63,7 @@
 #define SEM_LADO 'a'
 #define LIMPA_TELA printf("\n")
 
-int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
+int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char tj,int njh)
 {
 	int pp_1,pp_2; //pontas de peca
 	char lado=SEM_LADO;
@@ -80,9 +80,15 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 		}
 	else
 	{
-		//Opções de lado quando as pontas de peça coincidem com as pontas de mesa.
+		//Montagem das pontas de mesa quando há mais de uma opção de lado.
     	if((pp_1==pm[0] && pp_2==pm[1]) || (pp_1==pm[1] && pp_2==pm[0]))
 		{
+			//Escolha automatizada de lado quando o jogador é uma máquina
+			//ou quando as pontas de mesa e pontas de peça são todas iguais.
+			if(  (pp_1==pp_2) || tj=='m')
+				lado='d';
+
+			//Escolha manual do lado da mesa onde se quer jogar a peca
 			while (lado != 'e' && lado != 'd')
 			{
 				printf("Digite \"d\" para escolher o lado direito da mesa "
@@ -92,8 +98,8 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 				if (lado != 'e' && lado != 'd') 
 					printf("VOCE DIGITOU UM CARACTER DIFERENTE DO ESPERADO.\n\n");
 			}
-
-			
+		    
+			//Montagem das pontas de mesa
 			if(lado=='d')
 			{
 				if(pm[1] ==pp_1) pm[1]=pp_2;
@@ -105,7 +111,7 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 				else pm[0]=pp_1;
 		    }
 		}
-		//Busca de uma coincidência entre pontas de peça e pontas de mesa.
+		//Montagem das pontas de mesa quando há apenas uma opção de lado.
 	 	else
 	 	{
 		
@@ -116,7 +122,7 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[])
 	 	}
 	}
 	//rolagem de tela
-	if(!DEBUG)
+	if(!DEBUG && tj=='h' && njh>1)
 	{
 		int i;
 		for (i=1;i<=1000;i++)

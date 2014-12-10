@@ -95,12 +95,12 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog)
 			{
 				pp_1=mao_c[i]/10;
 				pp_2=mao_c[i]-pp_1*10;
-				soma_m[j] +=pp_1+pp_2;
+				soma_m[j-1] +=pp_1+pp_2;
 			}
 
-    	if (menor > soma_m[j]) 
+    	if (menor > soma_m[j-1]) 
 		{
-			 menor =soma_m[j];
+			 menor =soma_m[j-1];
 			 jog_ven=j;
 		}
 	
@@ -113,7 +113,7 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog)
 		else if(j==2) mostra_mao(mao_2,t_mao);
 		else if(j==3) mostra_mao(mao_3,t_mao);
 		else mostra_mao(mao_4,t_mao);
-		printf("Soma =%d\n\n", soma_m[j]);
+		printf("Soma =%d\n\n", soma_m[j-1]);
 	}
 	printf("\nO JOGADOR %d VENCEU!\n", jog_ven);
 

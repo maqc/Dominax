@@ -66,7 +66,7 @@ int teste_final(int mao[],int jogador,int t_mao)
 {
 	int soma=0;
 	int i;
-	for(i=0;i<=t_mao;i++)
+	for(i=0;i<t_mao;i++)
 		soma+=mao[i];
 	if(soma == FIM1 || soma ==FIM2)
 	{

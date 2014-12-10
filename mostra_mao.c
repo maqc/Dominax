@@ -75,7 +75,7 @@ int mostra_mao(int mao[],int t_mao)
 			printf ("%d",mao[i]);
 		if (i < UIV && mao[i]!=99) 
 			printf(",");
-		else if (i==6) printf("}\n");
+		else if (i==(t_mao-1)) printf("}\n");
 	}
 	return 0;
 }

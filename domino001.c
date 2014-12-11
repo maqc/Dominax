@@ -108,11 +108,21 @@ int main(void)
 	int njh=1;//número de jogadores humanos
 	char nomes[4][20];//Registra os nomes dos jogadores
 	char *nome; //Aponta para o nome do jogador corrente
-
-	printf("\n\nVamos iniciar uma partida de domino.\n\n");
+	
+	printf("\nSeja bem vindo ao Domino001!\nVoce podera jogar de duas maneiras diferentes:\n\nCom outro jogador ou contra tres jogadores.\n Prepare-se, divirta-se e Venca se for capaz!");
+	printf("\n\nVamos iniciar a partida!\n\n");
 
 	printf("Sera uma partida com 2 ou com 4 jogadores?\n");
 	scanf("%d",&n_jog);
+	
+	while(n_jog !=2 && n_jog !=4)
+	{
+		printf("Sera uma partida com 2 ou com 4 jogadores?\n");
+		scanf("%d", &n_jog);
+		while(getchar()!= '\n')
+			getchar();
+	}
+
 	t_mao= N_PECAS/n_jog;
 
 	//Registro dos nomes e do tipo de jogador, humano ou máquina.

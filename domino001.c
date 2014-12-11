@@ -65,7 +65,7 @@
 #include <stdlib.h>
 
 ///\cond DEBUG
-#define HOUVE_TOQUE 99 ///Constante para indicar a ocorrência de toque.
+#define HOUVE_TOQUE 100 ///Constante para indicar a ocorrência de toque.
 #define SEM_TOQUE 0
 #define PECA_RETIRADA 99
 #define N_PECAS 28 // Número de peças de um jogo de dominó.
@@ -96,7 +96,7 @@ int main(void)
 	int i,j; //contadores
 	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
-	int mem_toq[4]={0,0,0,0}; //memoria de toque
+	int mem_toq[4]={0}; //memoria de toque
 	int mao_1[14]; 
 	int mao_2[14];
 	int mao_3[7];
@@ -115,17 +115,19 @@ int main(void)
 	scanf("%d",&n_jog);
 	t_mao= N_PECAS/n_jog;
 
-	//Seleção do tipo de jogador, humano ou máquina.
+	//Registro dos nomes e do tipo de jogador, humano ou máquina.
 	for(j=1;j<=n_jog;j++)
 	{
-		printf("Escreva o nome do jogador %d:\n",j);
-			scanf("%s",nomes[j-1]); printf("O nome escolhido foi %s\n",nomes[j-1]);
+		printf("\nEscreva o nome do jogador %d (sem usar espaco):\n",j);
+			scanf("%s",nomes[j-1]); 
 		if(j>1)
 		{
 			while(t_jog[j-2] !='h' && t_jog[j-2]!='m')
 			{
-				printf("O jogador %d sera humano? Digite h para sim e m para nao.\n",j);
-				while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+				while( getchar() != '\n' ) 
+					getchar(); //descarregamento de buffer
+
+				printf("\nO jogador %d sera humano? Digite h para sim e m para nao.\n",j);
 				t_jog[j-2]=getchar();
 
 				if(t_jog[j-2]=='h')
@@ -139,9 +141,10 @@ int main(void)
 	//escolha do iniciante
 	while(p_jog < 1 || p_jog > n_jog )
 	{
-		printf("Qual jogador iniciara? Digite qualquer numero de 1 a %d. \n", n_jog);
+		printf("\nQual jogador iniciara? Digite qualquer numero de 1 a %d. \n", n_jog);
 		scanf("%d", &p_jog);
-		while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+		while( getchar() != '\n' ) 
+			getchar(); //descarregamento de buffer
 		if (p_jog < 1 || p_jog > n_jog ) 
 			printf("Voce escolheu uma opcao invalida.\n\n");
 	}
@@ -153,7 +156,7 @@ int main(void)
 	// rodadas
 	while(rodada <= MAX_RODADAS)
 	{
-		printf("Rodada %d\n",rodada);
+		printf("\nRodada %d\n\n",rodada);
 
 		//troca de jogadores dentro de uma rodada
 		for(i=1;i<=n_jog;i++) 
@@ -190,10 +193,16 @@ int main(void)
 			{
 				if (teste_toque(mao_c,pm,t_mao)) 
 				{
-					printf("\n%s TOCOU!\n\n",nome);		
+					if (tj=='m')
+					{
+						printf("\n%s TOCOU!\n\n",nome);	
+						if(DEBUG)
+							mostra_mao(mao_c,t_mao);
+
+						t_peca =1; //ignora o teste de peca
+						tt= HOUVE_TOQUE; // variavel para ignorar etapas
+					}
 					mem_toq[jogador-1]=1;
-					t_peca =1; //ignora o teste de peca
-					tt= HOUVE_TOQUE; // variavel para ignorar etapas
 				}
 				else mem_toq[jogador-1]=0;
 			}
@@ -202,7 +211,7 @@ int main(void)
 				soma+=mem_toq[j];
 			if (soma == n_jog) 
 			{
-				contagem_maos(mao_1,mao_2,mao_3,mao_4,n_jog);	
+				contagem_maos(mao_1,mao_2,mao_3,mao_4,n_jog,nomes);	
 				return 0;
 			}
 
@@ -212,7 +221,7 @@ int main(void)
 				if (!DEBUG && tj=='h' && njh>1)
 				{
 					printf("%s, posso mostrar sua mao agora? "
-						   "Pressione \"<ENTER>\" quando estiver pronto.\n",nome);
+						   "Pressione \"<ENTER>\" mostra-la.\n",nome);
 					getchar();
 				}
 				else printf("%s\n",nome);
@@ -227,16 +236,26 @@ int main(void)
 			{
 				if(tj=='h')
 				{
-					printf("\nDigite a peca que vc quer jogar: ");
+					printf("\nDigite a peca que vc quer jogar ou 100 se tocou: ");
 					scanf("%d",&peca);
-					while( getchar() != '\n' ) getchar(); //descarregamento de buffer
+					while( getchar() != '\n' ) 
+						getchar(); //descarregamento de buffer
 				}
 				else 
 				{
 					peca=mao_c[j];
 					j++;
 				}
-				t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador,t_mao,tj);
+
+				if (peca==HOUVE_TOQUE)
+				{
+					
+					tt=HOUVE_TOQUE;
+					t_peca=1;
+				}
+				else
+					t_peca = teste_peca(&peca,rodada,p_jog,pm,mao_c,jogador,t_mao,tj);
+
 				if(t_peca==1 && tj=='m')
 				{
 					if(peca!=0) 
@@ -255,10 +274,13 @@ int main(void)
 
 				//montagem das pontas de mesa
 				monta_pm(rodada,jogador,p_jog,peca,pm,tj,njh);
-
+				
 				//teste de fim de jogo
-				if (teste_final(mao_c,jogador,t_mao)) return 0;
+				if (teste_final(mao_c,nome,t_mao)) return 0;
 			}
+			if(tj=='h' && tt==HOUVE_TOQUE) 
+				printf("%s tocou.\n",nome);
+
 			tt=SEM_TOQUE;
 
 			jogador= (jogador % n_jog) +1; //troca de jogador	

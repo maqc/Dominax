@@ -59,7 +59,7 @@
 #include <stdio.h>
 #include "minhas_funcoes.h"
 
-int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog)
+int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog, char nomes[][20])
 {
 	int menor=10000; // menor mao
 	int jog_ven=1; //jogador vencedor
@@ -108,7 +108,7 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog)
 
 	for(j=1;j<=n_jog;j++)
 	{
-		printf("Jogador %d\n",j);
+		printf("%s\n",nomes[j-1]);
 		if (j==1) mostra_mao(mao_1,t_mao);
 		else if(j==2) mostra_mao(mao_2,t_mao);
 		else if(j==3) mostra_mao(mao_3,t_mao);

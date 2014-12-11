@@ -100,11 +100,11 @@ int teste_toque(int mao[],int pm[], int t_mao);
  *\details Função que verifica se o jogador corrente ainda tem alguma peça na
  *sua mão, encontrando assim o jogador vitorioso.
  *\param[in] mao Armazena as peças da mão do jogador corrente.
- *\param[in] jogador Armazena o jogador corrente.
+ *\param[in] *nome Aponta para o jogador corrente.
  *\param[in] t_mao Tamanho da mão de um jogador.
  * 
  */
-int teste_final(int mao[],int jogador,int t_mao);
+int teste_final(int mao[],char *nome,int t_mao);
 
 /**
  *\ingroup GrupoÚnico
@@ -135,7 +135,7 @@ int teste_peca(int *peca,int rodada,int p_jog,int pm[],int mao[],int jogador,int
  *\param[in] n_jog Número de jogadores.
  * 
  */
-int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog);
+int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog,char nomes[][20]);
 
 /**
  *\ingroup GrupoÚnico

@@ -62,7 +62,7 @@
 #define FIM1 693 //=7*99, onde 7=tamanho da mao, 99=valor da peça retirada
 #define FIM2 1386 //=14*99, onde 14=tamanho da mao, 99=valor da peça retirada
 
-int teste_final(int mao[],int jogador,int t_mao)
+int teste_final(int mao[],char *nome,int t_mao)
 {
 	int soma=0;
 	int i;
@@ -70,7 +70,7 @@ int teste_final(int mao[],int jogador,int t_mao)
 		soma+=mao[i];
 	if(soma == FIM1 || soma ==FIM2)
 	{
-		printf("Fim de jogo, o jogador %d venceu!\n",jogador);
+		printf("Fim de jogo, o jogador %d venceu!\n",*nome);
 		return 1;
 	}
 	return 0;

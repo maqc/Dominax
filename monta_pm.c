@@ -128,7 +128,8 @@ int monta_pm(int rodada, int jogador, int p_jog, int peca, int pm[],char tj,int 
 		for (i=1;i<=1000;i++)
 			LIMPA_TELA;
 	}	
-
+	//saída
 	printf("Pontas da mesa: %d | %d\n\n",pm[0], pm[1]);
+
 	return 0;
 }

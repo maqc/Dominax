@@ -70,7 +70,7 @@ int teste_final(int mao[],char *nome,int t_mao)
 		soma+=mao[i];
 	if(soma == FIM1 || soma ==FIM2)
 	{
-		printf("Fim de jogo, o jogador %d venceu!\n",*nome);
+		printf("Fim de jogo, %s venceu!\n",nome);
 		return 1;
 	}
 	return 0;

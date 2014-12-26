@@ -20,4 +20,4 @@ clean :
 	rm *.x errors.err
 
 copy :
-	cp *.c minhas_funcoes.h READEM.md domino001.x makefile ../../trabalhos/domino001
+	cp -r *.c minhas_funcoes.h LICENSE README.md domino001.x doxdomino001.cfg ./doc makefile ../../trabalhos/domino001

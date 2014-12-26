@@ -109,7 +109,8 @@ int main(void)
 	char nomes[4][20];//Registra os nomes dos jogadores
 	char *nome; //Aponta para o nome do jogador corrente
 	
-	printf("\nSeja bem vindo ao Domino001!\nVoce podera jogar de duas maneiras diferentes:\n\nCom outro jogador ou contra tres jogadores.\n Prepare-se, divirta-se e Venca se for capaz!");
+	printf("\nSeja bem vindo ao Domino001!\nVoce podera jogar de duas maneiras diferentes:\n\n"
+	       "Com outro jogador ou contra tres jogadores.\n Prepare-se, divirta-se e Venca se for capaz!");
 	printf("\n\nVamos iniciar a partida!\n\n");
 
 	printf("Sera uma partida com 2 ou com 4 jogadores?\n");
@@ -231,7 +232,7 @@ int main(void)
 				if (!DEBUG && tj=='h' && njh>1)
 				{
 					printf("%s, posso mostrar sua mao agora? "
-						   "Pressione \"<ENTER>\" mostra-la.\n",nome);
+					       "Pressione \"<ENTER>\" mostra-la.\n",nome);
 					getchar();
 				}
 				else printf("%s\n",nome);

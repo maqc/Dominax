@@ -115,7 +115,7 @@ int contagem_maos(int mao_1[], int mao_2[], int mao_3[], int mao_4[],int n_jog, 
 		else mostra_mao(mao_4,t_mao);
 		printf("Soma =%d\n\n", soma_m[j-1]);
 	}
-	printf("\nO JOGADOR %d VENCEU!\n", jog_ven);
+	printf("\n%s VENCEU!\n", nomes[jog_ven-1]);
 
 	return 0;
 }

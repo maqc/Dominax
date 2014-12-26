@@ -93,7 +93,7 @@ int main(void)
 	int peca=PECA_INEXISTENTE;
 	int rodada=1;
 	int pm[2]={PMV,PMV}; //pontas de mesa
-	int i,j; //contadores
+	int i=0,j=0; //contadores
 	int tt=SEM_TOQUE;//teste de toque
 	int *mao_c; //apontador para a mao corrente
 	int mem_toq[4]={0}; //memoria de toque
@@ -108,6 +108,7 @@ int main(void)
 	int njh=1;//número de jogadores humanos
 	char nomes[4][20];//Registra os nomes dos jogadores
 	char *nome; //Aponta para o nome do jogador corrente
+	int dozao=0; //Usada no teste da escolha da primeira peça da partida
 	
 	printf("\nSeja bem vindo ao Domino001!\nVoce podera jogar de duas maneiras diferentes:\n\n"
 	       "Com outro jogador ou contra tres jogadores.\n Prepare-se, divirta-se e Venca se for capaz!");
@@ -149,20 +150,19 @@ int main(void)
 		}
 	}
 
-	//escolha do iniciante
-	while(p_jog < 1 || p_jog > n_jog )
-	{
-		printf("\nQual jogador iniciara? Digite qualquer numero de 1 a %d. \n", n_jog);
-		scanf("%d", &p_jog);
-		while( getchar() != '\n' ) 
-			getchar(); //descarregamento de buffer
-		if (p_jog < 1 || p_jog > n_jog ) 
-			printf("Voce escolheu uma opcao invalida.\n\n");
-	}
-	jogador = p_jog;
-
 	//Sorteio das maos
 	sorteio_maos(mao_1,mao_2,mao_3,mao_4,n_jog);
+
+	//escolha do iniciante
+	while(p_jog==SEM_JOGADOR)
+	{
+		if(mao_1[i]==66) p_jog=1;
+		if(mao_2[i]==66) p_jog=2;
+		if(mao_3[i]==66) p_jog=3;
+		if(mao_4[i]==66) p_jog=4;
+		i++;	
+	}
+	jogador = p_jog;
 
 	// rodadas
 	while(rodada <= MAX_RODADAS)
@@ -247,14 +247,25 @@ int main(void)
 			{
 				if(tj=='h')
 				{
-					printf("\nDigite a peca que vc quer jogar ou 100 se tocou: ");
-					scanf("%d",&peca);
-					while( getchar() != '\n' ) 
-						getchar(); //descarregamento de buffer
+					dozao=0;
+					while(dozao!=66)
+					{
+						printf("\nDigite a peca que vc quer jogar ou 100 se tocou: ");
+						scanf("%d",&peca);
+						while( getchar() != '\n' ) 
+							getchar(); //descarregamento de buffer
+						if(rodada==1 && jogador==p_jog && peca!=66)
+							printf("\nA primeira peca da partida deve ser o dozao.\n");
+						else
+							dozao=66;
+					}
 				}
 				else 
 				{
-					peca=mao_c[j];
+					if(rodada==1 && jogador==p_jog)
+						peca=66;
+					else 
+						peca=mao_c[j];
 					j++;
 				}
 

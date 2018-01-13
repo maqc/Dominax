@@ -1,5 +1,6 @@
 domino001
 =========
+Jogo de dominó para rodar em terminal linux.
 
 Trabalho final de Informática - Time 1
 
